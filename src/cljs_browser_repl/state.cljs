@@ -1,6 +1,8 @@
 (ns cljs-browser-repl.state
   (:require [reagent.core :refer [atom]]))
 
+;; History
+
 (def initial-history-message
   "(comment
 
@@ -29,3 +31,8 @@
   (let [cause (.-cause err)]
     (str "Error: " (.-message cause) "\n")))
 (defn to-repl-result [e] e)
+
+;; Compiler
+
+(defonce current-ns (atom 'cljs.user))
+

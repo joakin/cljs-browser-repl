@@ -9,7 +9,10 @@
       (f (.. e -target -value))
       (set! (.. e -target -value) ""))))
 
-(defn repl-input [{:keys [on-input]}]
-  [:input.repl-input
-   {:type "text" :on-key-up (if-enter on-input)
-    :placeholder "Type clojurescript code here"}])
+(defn repl-input [{:keys [pre-label on-input]}]
+  (println pre-label)
+  [:div.repl-input
+   [:span.repl-input-pre pre-label]
+   [:input.repl-input-input
+    {:type "text" :on-key-up (if-enter on-input)
+     :placeholder "Type clojurescript code here"}]])

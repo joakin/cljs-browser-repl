@@ -1,9 +1,8 @@
 (ns cljs-browser-repl.ui.history
-  (:require [cljs-browser-repl.state :as state]
-            [clojure.string :as string]))
+  (:require [clojure.string :as string]))
 
-(defn- history-raw []
-  [:pre.history (apply str (string/join "\n" @state/history))])
+(defn- history-raw [hs]
+  [:pre.history (apply str (string/join "\n" hs))])
 
 (def history
   (with-meta
