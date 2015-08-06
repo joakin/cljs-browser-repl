@@ -5,13 +5,19 @@
   event."
   [f]
   (fn [e]
-    (when (= (.-key e ) "Enter")
-      (f (.. e -target -value))
-      (set! (.. e -target -value) ""))))
+    (let [shift? (.-shiftKey e)
+          enter? (= (.-key e ) "Enter")]
+      (when enter?
+        (if shift?
+          (set! (.. e -target -value) (str (.. e -target -value) "\n"))
+          (do
+            (f (.. e -target -value))
+            (set! (.. e -target -value) "")))))))
 
 (defn repl-input [{:keys [pre-label on-input]}]
   [:div.repl-input
    [:span.repl-input-pre pre-label]
-   [:input.repl-input-input
-    {:type "text" :on-key-up (if-enter on-input)
-     :placeholder "Type clojurescript code here"}]])
+   [:textarea.repl-input-input
+    {:on-key-up (if-enter on-input)
+     :placeholder "Type clojurescript code here"
+     :rows 1}]])
