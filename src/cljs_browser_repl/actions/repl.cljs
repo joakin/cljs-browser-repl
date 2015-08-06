@@ -23,6 +23,3 @@
                   (do
                     (reset! state/current-ns ns)
                     (state/to-repl-result value)))))))))
-
-(defonce initialize-repl-ns
-  (do (repl-input! "(ns cljs.user)" false)))

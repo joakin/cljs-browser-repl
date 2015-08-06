@@ -1,5 +1,6 @@
 (ns ^:figwheel-always cljs-browser-repl.core
     (:require [reagent.core :as reagent]
+              [cljs-browser-repl.actions.repl :refer [repl-input!]]
               [cljs-browser-repl.ui.cljs-browser-repl :refer [cljs-browser-repl]]))
 
 (enable-console-print!)
@@ -7,6 +8,9 @@
 (defn render! []
   (reagent/render-component [cljs-browser-repl]
                             (. js/document (getElementById "app"))))
+
+(defonce initialize-repl-ns
+  (do (repl-input! "(ns cljs.user)" false)))
 
 (render!)
 
