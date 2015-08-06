@@ -32,8 +32,11 @@
               :source-paths ["src"]
               :compiler {:output-to "resources/public/js/compiled/cljs_browser_repl.js"
                          :main cljs-browser-repl.core
-                         :optimizations :advanced
-                         :pretty-print false}}]}
+                         :optimizations :simple
+                         :pretty-print false
+                         :optimize-constants true
+                         :static-fns true
+                         }}]}
 
   :figwheel {
              ;; :http-server-root "public" ;; default and assumes "resources" 
