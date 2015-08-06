@@ -1,34 +1,38 @@
 # cljs-browser-repl
 
-A web clojurescript repl.
+A clojurescript repl in your browser! 😱
 
-## Overview
+Visit the deployed page at
+[chimeces.com/cljs-browser-repl](http://chimeces.com/cljs-browser-repl/).
 
-## Setup
+## Current status
 
-To get an interactive development environment run:
+Still figuring things out, can't define vars or functions yet, doc is not
+working.
 
-    lein figwheel
+## Contributing
 
-and open your browser at [localhost:3449](http://localhost:3449/).
-This will auto compile and send all changes to the browser without the
-need to reload. After the compilation process is complete, you will
-get a Browser Connected REPL. An easy way to try it is:
+Please. Needs java, leiningen, node & npm.
 
-    (js/alert "Am I connected?")
+### In dev
 
-and you should see an alert in the browser window.
+`rlwrap lein figwheel` Will start the dev server and cljs compilation.
 
-To clean all compiled files:
+In another terminal do `npm start` for kicking off the style builder.
 
-    lein clean
+Do not commit the `resources/public/style.css` or
+`resources/public/js/compiled/cljs_browser_repl.js`, I'll update those when
+making a deployment.
 
-To create a production build run:
+### For deploying
 
-    lein cljsbuild once min
+In general I'll deploy so don't commit the previously mentioned assets.
+Instructions are:
 
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL.
+Generating js: `lein clean && lein cljsbuild once min`
+Generating css: `npm run build`
+For deploying use git subtree to push the `resources/public` subtree to the
+branch `gh-pages`.
 
 ## License
 
