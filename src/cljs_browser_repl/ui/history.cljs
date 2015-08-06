@@ -4,7 +4,7 @@
 (defn history-input [{:keys [value]}]
   [:p.history-input value])
 (defn history-response [{:keys [value]}]
-  [:p.history-response value])
+  [:p.history-response (pr-str value)])
 (defn history-response-error [{:keys [value]}]
   [:p.history-response-error (.. value -cause -message)])
 
@@ -12,10 +12,10 @@
   [:div.history
    (for [entry hs]
      ^{:key (str "hist-" (:date entry))}
-     (case (:type entry)
-       :input [history-input entry]
-       :response [history-response entry]
-       :response-error [history-response-error entry]))])
+     [(case (:type entry)
+       :input history-input
+       :response history-response
+       :response-error history-response-error) entry])])
 
 (def history
   (with-meta
