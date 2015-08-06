@@ -25,3 +25,7 @@
 
 (defn add-entry [h e] (conj h e))
 (defn to-repl-entry [e] (str "> " e))
+(defn to-repl-error [err]
+  (let [cause (.-cause err)]
+    (str "Error: " (.-message cause) "\n")))
+(defn to-repl-result [e] e)
