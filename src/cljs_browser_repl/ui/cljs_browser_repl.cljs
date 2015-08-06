@@ -7,7 +7,6 @@
             ))
 
 (defn cljs-browser-repl []
-  (println @state/current-ns)
   [:div.cljs-browser-repl
    [top-bar]
    [history @state/history]

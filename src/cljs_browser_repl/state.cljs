@@ -3,8 +3,15 @@
 
 ;; History
 
+(defn now [] (.now js/Date))
+(defn add-entry [h e] (conj h e))
+
+(defn to-repl-input  [source] {:date (now) :type :input          :value source})
+(defn to-repl-error  [err]    {:date (now) :type :response-error :value err})
+(defn to-repl-result [resp]   {:date (now) :type :response       :value resp})
+
 (def initial-history-message
-  "(comment
+  (to-repl-input "(comment
 
   Hi! Welcome to the web clojurescript repl.
 
@@ -20,17 +27,9 @@
 
   Have fun!
 
-  )
-")
+  )"))
 
 (defonce history (atom [initial-history-message]))
-
-(defn add-entry [h e] (conj h e))
-(defn to-repl-entry [e] (str "> " e))
-(defn to-repl-error [err]
-  (let [cause (.-cause err)]
-    (str "Error: " (.-message cause) "\n")))
-(defn to-repl-result [e] e)
 
 ;; Compiler
 

@@ -5,3 +5,26 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.1) inset;
   white-space: pre-wrap;
 }
+.history-input {
+  margin-bottom: 0.5em;
+  &:before {
+    content: '> ';
+    display: inline-block;
+    width: 20px;
+    font-size: 60%;
+    font-weight: bold;
+    vertical-align: baseline;
+  }
+}
+.history-response,
+.history-response-error {
+  margin-top: 0.5em;
+  padding: 0px 25px;
+}
+.history-response {
+  font-weight: bold;
+}
+.history-response-error {
+  color: red;
+  font-style: italic;
+}

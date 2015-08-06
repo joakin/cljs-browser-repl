@@ -1,8 +1,21 @@
 (ns cljs-browser-repl.ui.history
   (:require [clojure.string :as string]))
 
+(defn history-input [{:keys [value]}]
+  [:p.history-input value])
+(defn history-response [{:keys [value]}]
+  [:p.history-response value])
+(defn history-response-error [{:keys [value]}]
+  [:p.history-response-error (.. value -cause -message)])
+
 (defn- history-raw [hs]
-  [:pre.history (apply str (string/join "\n" hs))])
+  [:div.history
+   (for [entry hs]
+     ^{:key (str "hist-" (:date entry))}
+     (case (:type entry)
+       :input [history-input entry]
+       :response [history-response entry]
+       :response-error [history-response-error entry]))])
 
 (def history
   (with-meta

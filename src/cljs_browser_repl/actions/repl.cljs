@@ -10,7 +10,7 @@
   ([code history?]
    ; Add just typed command to history
    (when history?
-     (swap! state/history state/add-entry (state/to-repl-entry code)))
+     (swap! state/history state/add-entry (state/to-repl-input code)))
    (eval-code
      @state/current-ns
      repl-compiler-state code
