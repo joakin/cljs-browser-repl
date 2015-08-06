@@ -10,7 +10,6 @@
       (set! (.. e -target -value) ""))))
 
 (defn repl-input [{:keys [pre-label on-input]}]
-  (println pre-label)
   [:div.repl-input
    [:span.repl-input-pre pre-label]
    [:input.repl-input-input
