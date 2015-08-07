@@ -4,7 +4,7 @@
 (defn history-input [{:keys [value]}]
   [:p.history-input value])
 (defn history-response [{:keys [value]}]
-  [:p.history-response (pr-str value)])
+  [:p.history-response (println-str value)])
 (defn history-response-error [{:keys [value]}]
   [:p.history-response-error (.. value -cause -message)])
 
