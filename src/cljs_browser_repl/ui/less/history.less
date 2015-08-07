@@ -10,13 +10,15 @@
 .history-input {
   margin-bottom: 0.5em;
   color: #777;
+  position: relative;
+  padding-left: 23px;
   &:before {
     content: '> ';
-    display: inline-block;
-    width: 23px;
+    position: absolute;
+    left: 0;
+    padding: 3px;
     font-size: 15px;
     font-weight: bold;
-    vertical-align: baseline;
     color: blue;
   }
 }
