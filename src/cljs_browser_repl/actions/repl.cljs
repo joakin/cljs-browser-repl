@@ -1,6 +1,6 @@
 (ns cljs-browser-repl.actions.repl
   (:require [cljs-browser-repl.state :as state]
-            [cljs-browser-repl.compiler :refer [eval-code empty-compiler-state]]
+            [cljs-browser-repl.compiler :refer [read-eval-print empty-compiler-state]]
             [clojure.string :refer [blank?]]
             ))
 
@@ -13,9 +13,9 @@
      ; Add just typed command to history
      (when history?
        (swap! state/history state/add-entry (state/to-repl-input code)))
-     (eval-code
-       @state/current-ns
-       repl-compiler-state code
+     (read-eval-print
+       repl-compiler-state state/current-ns
+       code true
        (fn [{:keys [ns value error] :as ret}]
          ; Add result to history
          (when history?
