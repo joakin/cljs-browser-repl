@@ -5,7 +5,7 @@
 
 (defn- eval-code [ns compiler-state code cb]
   (cljs/eval-str
-    compiler-state code code
+    compiler-state code nil
     {:ns ns
      :eval cljs/js-eval
      :source-map true
