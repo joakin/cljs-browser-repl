@@ -6,29 +6,31 @@
     (set! (.. input -style -height) "auto")
     (set! (.. input -style -height) (str (.-scrollHeight input) "px"))))
 
-(defn if-enter
-  "Returns a function that gets an event and will call f if the event passed in
-  was a 'Enter' key event."
+(defn enter?
+  "Is an event the Enter key?"
   [f] (fn [e] (when (= (.-key e ) "Enter") (f e))))
 
+(defn set-val! [e v] (set! (.. e -target -value) v))
+(defn get-val [e] (.. e -target -value))
+
 (defn enter-pressed!
-  "When shift+enter adds a new line. When only enter it runs the callback
-  function and clears value and triggers the resize."
-  [e cb]
-  (let [shift? (.-shiftKey e)
-        v (.. e -target -value)
-        set-val! #(set! (.. e -target -value) %)]
-    (when-not shift?
-      (cb (string/trim v))
-      (set-val! "")
+  "When shift+enter adds a new line. When only enter if the input is valid it
+  runs the callback function and clears value and triggers the resize. If the
+  input is not valid i'll do as if it was a shift+enter"
+  [e valid? send-input]
+  (let [shift? (.-shiftKey e)]
+    (when (and (not shift?) valid?)
+      (send-input (string/trim (get-val e)))
+      (set-val! e "")
       (.preventDefault e)
       (change e))))
 
-(defn repl-input [{:keys [pre-label on-input]}]
+(defn repl-input [{:keys [pre-label on-input valid-input?]}]
   [:div.repl-input
    [:span.repl-input-pre pre-label]
    [:textarea.repl-input-input
-    {:on-key-down (if-enter #(enter-pressed! % on-input))
+    {:on-key-down #(if (enter? %)
+                     (enter-pressed! % (valid-input? (get-val %)) on-input))
      :on-change change
      :on-input change
      :placeholder "Type clojurescript code here"
