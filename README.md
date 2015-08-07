@@ -5,6 +5,9 @@ A clojurescript repl in your browser! 😱
 Visit the deployed page at
 [chimeces.com/cljs-browser-repl](http://chimeces.com/cljs-browser-repl/).
 
+![Repl](https://i.imgur.com/UWmycXw.png)
+![Repl doc & autosize input](https://i.imgur.com/gOC4otV.png)
+
 ## Current status
 
 * Repl implemented
