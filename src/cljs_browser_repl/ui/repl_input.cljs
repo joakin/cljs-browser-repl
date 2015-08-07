@@ -1,6 +1,11 @@
 (ns cljs-browser-repl.ui.repl-input
   (:require [clojure.string :as string]))
 
+(defn change [e]
+  (let [input (.-target e)]
+    (set! (.. input -style -height) "auto")
+    (set! (.. input -style -height) (str (.-scrollHeight input) "px"))))
+
 (defn if-enter
   "Returns a function that gets an event and will call f if the event passed in
   was a 'Enter' key event."
@@ -8,18 +13,16 @@
 
 (defn enter-pressed!
   "When shift+enter adds a new line. When only enter it runs the callback
-  function and clears value."
+  function and clears value and triggers the resize."
   [e cb]
   (let [shift? (.-shiftKey e)
         v (.. e -target -value)
         set-val! #(set! (.. e -target -value) %)]
-    (if-not shift?
-      (do (cb (string/trim v)) (set-val! "") (.preventDefault e)))))
-
-(defn change [e]
-  (let [input (.-target e)]
-    (set! (.. input -style -height) "auto")
-    (set! (.. input -style -height) (str (.-scrollHeight input) "px"))))
+    (when-not shift?
+      (cb (string/trim v))
+      (set-val! "")
+      (.preventDefault e)
+      (change e))))
 
 (defn repl-input [{:keys [pre-label on-input]}]
   [:div.repl-input
