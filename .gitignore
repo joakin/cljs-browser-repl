@@ -14,3 +14,4 @@ pom.xml
 npm-debug.log
 node_modules/
 resources/public/app.js
+bower_components/
