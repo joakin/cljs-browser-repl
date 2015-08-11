@@ -1,4 +1,5 @@
-(ns cljs-browser-repl.ui.history-entry)
+(ns cljs-browser-repl.ui.history-entry
+  (:require [clojure.string :as string]))
 
 (declare history-entry)
 
@@ -35,7 +36,11 @@
 
 (defn history-entry [{:keys [on-click]} entry]
   [:div.history-entry
-   {:on-click (if on-click #(on-click (response-with-meta->entry entry)) nil)}
+   {:on-click #(on-click
+                 (let [sel (.toString (.getSelection js/window))
+                       value (if (string/blank? sel) (:value entry) sel)]
+                   (response-with-meta->entry
+                     (assoc entry :value value))))}
    [(case (:type entry)
       :input history-input
       :response-error history-response-error
