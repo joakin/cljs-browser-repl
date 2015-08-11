@@ -3,7 +3,9 @@
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]]
             [cljs.pprint :refer [pprint]]
-            [cljs-browser-repl.state :refer [to-repl-error]]))
+            [cljs-browser-repl.state :refer [to-repl-error]]
+            [cljs.reader :as edn]
+            ))
 
 (defn get!
   "Retrieves a gist by id. Returns a channel that will be filled with a clj-http
@@ -20,15 +22,19 @@
   The gist must not be truncated, must have an index.json file."
   [gist]
   (let [files (get-in gist [:body :data :files])
-        index-file (:index.json files)]
+        index-file (or (:index.edn files) (:index.json files))]
     (if (and index-file
-               (= (:type index-file) "application/json")
-               (not (:truncated index-file)))
-      (try
-        (js->clj (.parse js/JSON (:content index-file))
-                 :keywordize-keys true)
-        (catch :default e
-          (invalid-gist gist e)))
+             (not (:truncated index-file)))
+      (condp = (:language index-file)
+        "edn"
+        (edn/read-string (:content index-file))
+        "JSON"
+        (try
+          (map #(assoc % :type (keyword (:type %)))
+               (js->clj (.parse js/JSON (:content index-file))
+                        :keywordize-keys true))
+          (catch :default e
+            (invalid-gist gist e))))
       (invalid-gist gist "Invalid gist contents"))))
 
 #_(ns cljs.user
