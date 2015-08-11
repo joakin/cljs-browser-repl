@@ -10,34 +10,38 @@ Visit the deployed page at
 
 ## Current status
 
-* Repl implemented
-  * Most of the repl works, with the exception of `require` and friends, still have to figure what to do with these :)
-* Repl UI
-  * History
-  * Auto scroll bottom
-  * Auto-size text input
-  * Don't submit unreadable forms (insert new-lines)
-  * Shift+enter makes new line
-  * TBD:
-    * Navigate history
-      * From text input going up/down.
-      * Some form of tapping a form/result should populate the input with it.
-    * Max-height for the text-input.
+- [x] Repl implemented
+  - What do we do with `require` and friends?
+- Repl UI
+  * [x] History
+  * [x] Auto scroll bottom
+  * [x] Auto-size text input
+  * [x] Don't submit unreadable forms (insert new-lines)
+  * [x] Shift+enter makes new line
+  * Navigate history
+    * [ ] From text input going up/down.
+    * [x] Tapping a form/result should populate the input with it. (Also works selecting some text)
+    * [ ] Max-height for the text-input.
 * Other crazy things
   * Rendering of other types of forms in the repl history (read meta or `:type`, render as appropiate).
-    * Markdown
-    * Image url
-    * HTML
-  * Load history contents from url or uploaded file.
-  * Save history contents to gist/url or download file.
-  * Edit the history in the repl.
+    * [x] Markdown
+    * [ ] Image url
+    * [x] HTML
+  * Load history contents from:
+    * [ ] gist id
+    * [ ] url
+    * [ ] drag file into repl
+  * [ ] Save history contents to gist/url or download file
+  * [ ] Edit the history in the repl.
   * Loading libraries from cljsjs or somewhere else.
   * Provide default utilities in the repl (for creating a floating movable iframe to eval in? something like that?).
   * Add lessons support (load lesson exercises, check responses for match, move to next lesson).
 
 ## Contributing
 
-Please. Needs java, leiningen, node & npm.
+Please do.
+
+Needs java, leiningen, node & npm.
 
 ### In dev
 
