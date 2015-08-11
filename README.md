@@ -5,10 +5,35 @@ A clojurescript repl in your browser! 😱
 Visit the deployed page at
 [chimeces.com/cljs-browser-repl](http://chimeces.com/cljs-browser-repl/).
 
+![Repl](https://i.imgur.com/UWmycXw.png)
+![Repl doc & autosize input](https://i.imgur.com/gOC4otV.png)
+
 ## Current status
 
-Still figuring things out, can't define vars or functions yet, doc is not
-working.
+* Repl implemented
+  * Most of the repl works, with the exception of `require` and friends, still have to figure what to do with these :)
+* Repl UI
+  * History
+  * Auto scroll bottom
+  * Auto-size text input
+  * Don't submit unreadable forms (insert new-lines)
+  * Shift+enter makes new line
+  * TBD:
+    * Navigate history
+      * From text input going up/down.
+      * Some form of tapping a form/result should populate the input with it.
+    * Max-height for the text-input.
+* Other crazy things
+  * Rendering of other types of forms in the repl history (read meta or `:type`, render as appropiate).
+    * Markdown
+    * Image url
+    * HTML
+  * Load history contents from url or uploaded file.
+  * Save history contents to gist/url or download file.
+  * Edit the history in the repl.
+  * Loading libraries from cljsjs or somewhere else.
+  * Provide default utilities in the repl (for creating a floating movable iframe to eval in? something like that?).
+  * Add lessons support (load lesson exercises, check responses for match, move to next lesson).
 
 ## Contributing
 
