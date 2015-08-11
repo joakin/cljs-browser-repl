@@ -1,3 +1,5 @@
+@import "./history_entry";
+
 .history {
   overflow: auto;
   margin: 0;
@@ -6,31 +8,4 @@
   white-space: pre-wrap;
   font-family: Inconsolata, monospace;
   background-color: #f9f9f9;
-}
-.history-input {
-  margin-bottom: 0.5em;
-  color: #777;
-  position: relative;
-  padding-left: 23px;
-  &:before {
-    content: '> ';
-    position: absolute;
-    left: 0;
-    padding: 3px;
-    font-size: 15px;
-    font-weight: bold;
-    color: blue;
-  }
-}
-.history-response,
-.history-response-error {
-  margin-top: 0.5em;
-  padding: 0px 25px;
-}
-.history-response {
-  font-weight: bold;
-}
-.history-response-error {
-  color: red;
-  font-style: italic;
 }

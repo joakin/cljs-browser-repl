@@ -1,0 +1,39 @@
+.history-entry>* {
+  margin: 1em 0;
+}
+
+.history-input {
+  margin-bottom: 0.5em;
+  color: #777;
+  position: relative;
+  padding-left: 23px;
+  &:before {
+    content: '> ';
+    position: absolute;
+    left: 0;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    color: blue;
+  }
+}
+
+.history-response,
+.history-response-error {
+  margin-top: 0.5em;
+  padding: 0px 25px;
+}
+
+.history-response-cljs {
+  font-weight: bold;
+}
+
+.history-response-error {
+  color: red;
+  font-style: italic;
+}
+
+.history-unknown {
+  white-space: pre-wrap;
+  font-size: 0.75em;
+}
