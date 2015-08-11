@@ -43,7 +43,7 @@
                      (assoc entry :value value))))}
    [(case (:type entry)
       :input history-input
-      :response-error history-response-error
+      :error history-response-error
       :response history-response
       :html history-html
       history-unknown) entry]])

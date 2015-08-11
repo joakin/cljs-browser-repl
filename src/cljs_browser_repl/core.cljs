@@ -1,7 +1,8 @@
 (ns ^:figwheel-always cljs-browser-repl.core
     (:require [reagent.core :as reagent]
               [cljs-browser-repl.actions.repl :refer [repl-entry!]]
-              [cljs-browser-repl.ui.cljs-browser-repl :refer [cljs-browser-repl]]))
+              [cljs-browser-repl.ui.cljs-browser-repl :refer [cljs-browser-repl]]
+              [cljs-browser-repl.router :as router]))
 
 (enable-console-print!)
 
@@ -10,9 +11,16 @@
                             (. js/document (getElementById "app"))))
 
 (defonce initialize-repl-ns
-  (do (repl-entry! "(ns cljs.user)" false)))
+  (do
+    (.initializeTouchEvents js/React true)
+    ; Init compiler env
+    (repl-entry! "(ns cljs.user)" false)
+    ; First render
+    (render!)
+    ; Init router
+    (router/init)
+    ))
 
-(render!)
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

@@ -6,9 +6,10 @@
 (defn now [] (.now js/Date))
 (defn add-entry [h e] (conj h e))
 
-(defn to-repl-input  [source] {:date (now) :type :input          :value source})
-(defn to-repl-error  [err]    {:date (now) :type :response-error :value err})
-(defn to-repl-result [resp]   {:date (now) :type :response       :value resp})
+(defn to-repl [o] (assoc o :date (now)))
+(defn to-repl-input  [source] (to-repl {:type :input    :value source}))
+(defn to-repl-error  [err]    (to-repl {:type :error    :value err}))
+(defn to-repl-result [resp]   (to-repl {:type :response :value resp}))
 
 (def initial-history-message
   (to-repl-input "(comment
@@ -29,7 +30,7 @@
 
   )"))
 
-(defonce history (atom [initial-history-message]))
+(defonce history (atom []))
 
 ;; Compiler
 
