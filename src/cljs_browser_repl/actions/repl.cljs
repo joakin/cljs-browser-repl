@@ -6,10 +6,15 @@
 
 (defonce repl-compiler-state (empty-compiler-state))
 
-(defn repl-input!
-  ([code] (repl-input! code true))
+(defn new-input! [s]
+  (reset! state/input s))
+
+(defn repl-entry!
+  ([code] (repl-entry! code true))
   ([code history?]
    (when-not (blank? code)
+     ; Reset the current input
+     (new-input! "")
      ; Add just typed command to history
      (when history?
        (swap! state/history state/add-entry (state/to-repl-input code)))

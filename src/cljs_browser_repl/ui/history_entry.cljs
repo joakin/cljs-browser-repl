@@ -11,14 +11,14 @@
         value-of-value? (not (nil? (:value value)))
         new-value (if (and is-value-map? value-of-value?)
                     (:value value) value)]
-    (assoc entry :type sub-type :value new-value)))
+    (with-meta (assoc entry :type sub-type :value new-value) nil)))
 
 (defn history-response [{:keys [value] :as entry}]
   (let [sub-type (:type (meta value))]
     [:div.history-response
      {:class (if sub-type "" "history-response-cljs")}
      (if sub-type
-       [history-entry (response-with-meta->entry entry)]
+       [history-entry nil (response-with-meta->entry entry)]
        (println-str value))]))
 
 (defn history-response-error [{:keys [value]}]
@@ -33,8 +33,9 @@
      {:dangerouslySetInnerHTML {:__html html}}]))
 
 
-(defn history-entry [entry on-click]
+(defn history-entry [{:keys [on-click]} entry]
   [:div.history-entry
+   {:on-click (if on-click #(on-click (response-with-meta->entry entry)) nil)}
    [(case (:type entry)
       :input history-input
       :response-error history-response-error

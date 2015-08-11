@@ -1,16 +1,14 @@
 (ns cljs-browser-repl.ui.repl-input
   (:require [clojure.string :as string]))
 
-(defn change [e]
-  (let [input (.-target e)]
-    (set! (.. input -style -height) "auto")
-    (set! (.. input -style -height) (str (.-scrollHeight input) "px"))))
+(defn resize [node]
+  (set! (.. node -style -height) "auto")
+  (set! (.. node -style -height) (str (.-scrollHeight node) "px")))
 
 (defn enter?
   "Is an event the Enter key?"
   [e] (= (.-key e ) "Enter"))
 
-(defn set-val! [e v] (set! (.. e -target -value) v))
 (defn get-val [e] (.. e -target -value))
 
 (defn enter-pressed!
@@ -21,19 +19,27 @@
   (let [shift? (.-shiftKey e)]
     (when (and (not shift?) valid?)
       (send-input (string/trim (get-val e)))
-      (set-val! e "")
       (.preventDefault e)
-      (change e))))
+      )))
 
-(defn repl-input [{:keys [pre-label on-input valid-input?]}]
+(defn- repl-input-raw
+  [{:keys [pre-label on-change on-valid-input valid-input? value]}]
   [:div.repl-input
    [:span.repl-input-pre pre-label]
    [:textarea.repl-input-input
     {:on-key-down (fn [e]
                     (when (enter? e)
-                      (enter-pressed! e (valid-input? (get-val e)) on-input)))
-     :on-change change
-     :on-input change
+                      (enter-pressed! e (valid-input? (get-val e)) on-valid-input)))
+     :on-change #(on-change (get-val %))
      :placeholder "Type clojurescript code here"
      :rows 1
+     :value value
      }]])
+
+(def repl-input
+  (with-meta
+    repl-input-raw
+    {:component-did-update
+     (fn [this old-argv]
+       (let [input (.querySelector (.getDOMNode this) ".repl-input-input")]
+         (resize input)))}))

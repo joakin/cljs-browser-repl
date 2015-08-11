@@ -35,3 +35,6 @@
 
 (defonce current-ns (atom 'cljs.user))
 
+;; UI
+
+(defonce input (atom ""))
