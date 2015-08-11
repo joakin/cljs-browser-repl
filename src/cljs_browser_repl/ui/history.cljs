@@ -5,7 +5,7 @@
 (defn- history-raw [{:keys [on-entry-click]} hs]
   [:div.history
    (for [entry hs]
-     ^{:key (str "hist-" (:date entry))}
+     ^{:key (str "hist-" (:type entry) "-" (:date entry))}
      [history-entry {:on-click on-entry-click} entry])])
 
 (def history

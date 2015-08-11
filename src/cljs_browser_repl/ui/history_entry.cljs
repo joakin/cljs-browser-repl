@@ -1,5 +1,6 @@
 (ns cljs-browser-repl.ui.history-entry
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [cljs-browser-repl.markdown :as md]))
 
 (declare history-entry)
 
@@ -29,9 +30,12 @@
   [:pre.history-unknown (println-str entry)])
 
 (defn history-html [{:keys [value]}]
-  (let [html value]
-    [:div.history-html
-     {:dangerouslySetInnerHTML {:__html html}}]))
+  [:div.history-html
+   {:dangerouslySetInnerHTML {:__html value}}])
+
+(defn history-md [{:keys [value]}]
+  [:div.history-markdown
+   {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
 
 (defn history-entry [{:keys [on-click]} entry]
@@ -46,4 +50,5 @@
       :error history-response-error
       :response history-response
       :html history-html
+      :markdown history-md
       history-unknown) entry]])
