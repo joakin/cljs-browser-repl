@@ -5,30 +5,35 @@
 
 (defn now [] (.now js/Date))
 (defn add-entry [h e] (conj h e))
+(defn add-entries [h es] (apply conj h es))
 
 (defn to-repl [o] (assoc o :date (now)))
+
 (defn to-repl-input  [source] (to-repl {:type :input    :value source}))
 (defn to-repl-error  [err]    (to-repl {:type :error    :value err}))
 (defn to-repl-result [resp]   (to-repl {:type :response :value resp}))
 
-(def initial-history-message
-  (to-repl-input "(comment
+(defn to-repl-entry  [t source] (to-repl {:type t :value source}))
 
-  Hi! Welcome to the web clojurescript repl.
+(def initial-history-messages
+  (mapv #(apply to-repl-entry %)
+       [[:markdown "
+  ### Hi!
+
+  # Welcome to the web clojurescript repl.
 
   Enter any forms in the input at the bottom. Hit enter to evaluate.
 
-  Here are some examples of things to try:
+  Here are some examples of things to try:"]
+        [:input "(doc inc)"]
+        [:input "(inc 5)"]
+        [:input "(- 5 3)"]
+        [:input "(defn square [x] (* x x))"]
+        [:input "(square 6)"]
+        [:markdown "Have fun!
 
-    (doc inc)
-    (inc 5)
-    (- 5 3)
-    (defn square [x] (* x x))
-    (square 6)
-
-  Have fun!
-
-  )"))
+![](http://media2.giphy.com/media/HVr4gFHYIqeti/giphy.gif)"]
+        ]))
 
 (defonce history (atom []))
 

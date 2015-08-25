@@ -32,5 +32,4 @@
                       (state/to-repl-result value))))))))))
 
 (defn insert-repl-intro! []
-  (when (empty? @state/history)
-    (swap! state/history state/add-entry state/initial-history-message)))
+  (reset! state/history state/initial-history-messages))

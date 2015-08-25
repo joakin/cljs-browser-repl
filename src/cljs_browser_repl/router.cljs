@@ -38,6 +38,9 @@
 (defn replace! [url]
   (.replaceToken history url))
 
+(defn get-token []
+  (.getToken history))
+
 ;; Route definitions
 
 ; home

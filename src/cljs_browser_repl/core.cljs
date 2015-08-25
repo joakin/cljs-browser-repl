@@ -27,5 +27,6 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
   (render!)
+  (router/replace! (router/get-token))
 )
 
