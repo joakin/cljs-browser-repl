@@ -10,7 +10,8 @@
 (def empty-notebook
   {:id nil
    :gist nil
-   :cmds nil})
+   :cmds nil
+   :position 0})
 
 (defonce current-notebook (atom empty-notebook))
 
@@ -18,11 +19,20 @@
   (swap! state/history state/add-entry (state/to-repl cmd)))
 
 (defn play-notebook! []
-  (let [commands (:cmds @current-notebook)]
-    (doseq [{:keys [type value silent?] :as cmd} commands]
-      (case type
-        :input (repl-entry! value (not silent?))
-        (cmd-to-history! cmd)))))
+  (let [{:keys [cmds position]} @current-notebook]
+    (when cmds
+    (loop [pos (or position 0)]
+      (let [{:keys [type value silent?] :as cmd} (nth cmds pos)
+            new-pos (inc pos)]
+        (swap! current-notebook assoc :position new-pos)
+        (case type
+          :input (repl-entry! value (not silent?))
+          :stop nil
+          (cmd-to-history! cmd))
+        ;; If the command is stop or we're at the end of the book. Go away
+        (when (and (not= type :stop)
+                   (< new-pos (count cmds)))
+          (recur new-pos)))))))
 
 (defn from-gist!
   ([id] (from-gist! id "index"))
@@ -38,4 +48,5 @@
         (let [gist (<! (gist/get! id))
               commands (gist/get-commands gist file-name)]
           (reset! current-notebook empty-notebook)
+          (swap! current-notebook assoc :id id :gist gist :cmds commands)
           (play-notebook!)))))))
