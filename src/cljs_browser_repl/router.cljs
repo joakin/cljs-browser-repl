@@ -51,3 +51,5 @@
 (defroute "/gist/:id" [id]
   (notebook/from-gist! id))
 
+(defroute "/gist/:id/file/:file" [id file]
+  (notebook/from-gist! id file))
