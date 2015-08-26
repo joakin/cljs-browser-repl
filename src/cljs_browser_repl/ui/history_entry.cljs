@@ -37,14 +37,16 @@
   [:div.history-markdown
    {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
+(def clickable-entries #{:input :error :response})
 
-(defn history-entry [{:keys [on-click]} entry]
+(defn history-entry [{:keys [on-click]} {:keys [type] :as entry}]
   [:div.history-entry
-   {:on-click #(on-click
-                 (let [sel (.toString (.getSelection js/window))
-                       value (if (string/blank? sel) (:value entry) sel)]
-                   (response-with-meta->entry
-                     (assoc entry :value value))))}
+   {:on-click #(if (clickable-entries type)
+                 (on-click
+                   (let [sel (.toString (.getSelection js/window))
+                         value (if (string/blank? sel) (:value entry) sel)]
+                     (response-with-meta->entry
+                       (assoc entry :value value)))))}
    [(case (:type entry)
       :input history-input
       :error history-response-error
