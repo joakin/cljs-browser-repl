@@ -44,3 +44,13 @@
 ;; UI
 
 (defonce input (atom ""))
+
+;; Notebook
+
+(def empty-notebook
+  {:id nil
+   :gist nil
+   :cmds nil
+   :position 0})
+
+(defonce current-notebook (atom empty-notebook))

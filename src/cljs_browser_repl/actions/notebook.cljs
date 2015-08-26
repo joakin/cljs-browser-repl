@@ -7,24 +7,16 @@
             [cljs-browser-repl.state :as state]
             ))
 
-(def empty-notebook
-  {:id nil
-   :gist nil
-   :cmds nil
-   :position 0})
-
-(defonce current-notebook (atom empty-notebook))
-
 (defn cmd-to-history! [cmd]
   (swap! state/history state/add-entry (state/to-repl cmd)))
 
 (defn play-notebook! []
-  (let [{:keys [cmds position]} @current-notebook]
+  (let [{:keys [cmds position]} @state/current-notebook]
     (when cmds
     (loop [pos (or position 0)]
       (let [{:keys [type value silent?] :as cmd} (nth cmds pos)
             new-pos (inc pos)]
-        (swap! current-notebook assoc :position new-pos)
+        (swap! state/current-notebook assoc :position new-pos)
         (case type
           :input (repl-entry! value (not silent?))
           :stop nil
@@ -37,16 +29,16 @@
 (defn from-gist!
   ([id] (from-gist! id "index"))
   ([id file-name]
-   (if (= (:id @current-notebook) id)
+   (if (= (:id @state/current-notebook) id)
     (do ; If we are already on the notebook, just swap commands
-      (swap! current-notebook assoc
-             :cmds (gist/get-commands (:gist @current-notebook) file-name))
+      (swap! state/current-notebook assoc
+             :cmds (gist/get-commands (:gist @state/current-notebook) file-name))
       (play-notebook!))
     (do ; If it's a new notebook, re-fetch, store and play
       (reset! state/history [])
       (go
         (let [gist (<! (gist/get! id))
               commands (gist/get-commands gist file-name)]
-          (reset! current-notebook empty-notebook)
-          (swap! current-notebook assoc :id id :gist gist :cmds commands)
+          (reset! state/current-notebook state/empty-notebook)
+          (swap! state/current-notebook assoc :id id :gist gist :cmds commands)
           (play-notebook!)))))))
