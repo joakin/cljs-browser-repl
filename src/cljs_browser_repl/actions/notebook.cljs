@@ -7,7 +7,12 @@
             [cljs-browser-repl.state :as state]
             ))
 
-(defonce current-notebook (atom {:id nil :gist nil :cmds nil}))
+(def empty-notebook
+  {:id nil
+   :gist nil
+   :cmds nil})
+
+(defonce current-notebook (atom empty-notebook))
 
 (defn cmd-to-history! [cmd]
   (swap! state/history state/add-entry (state/to-repl cmd)))
@@ -32,5 +37,5 @@
       (go
         (let [gist (<! (gist/get! id))
               commands (gist/get-commands gist file-name)]
-          (reset! current-notebook {:id id :gist gist :cmds commands})
+          (reset! current-notebook empty-notebook)
           (play-notebook!)))))))
