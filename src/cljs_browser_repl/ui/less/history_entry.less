@@ -2,6 +2,33 @@
 
 .history-entry {
   white-space: pre-wrap;
+
+  hr {
+    margin: 2em 0;
+    border: 0;
+    height: 1px;
+    position: relative;
+
+    &:before { top: -0.5em; height: 1em; }
+    &:after {
+      content:'';
+      height: 0.5em;
+      top: 1px;
+    }
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+    }
+
+    &, &:before {
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+    }
+    &:after {
+      background-color: @bgColor;
+    }
+  }
 }
 .history-entry>* {
   margin: 1em 0;
