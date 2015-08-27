@@ -26,7 +26,7 @@
          (when history?
            (swap! state/history state/add-entry
                   (if error
-                    (state/to-repl-error error)
+                    (state/to-repl-error (.. error -cause -message))
                     (do
                       (reset! state/current-ns ns)
                       (state/to-repl-result value))))))))))

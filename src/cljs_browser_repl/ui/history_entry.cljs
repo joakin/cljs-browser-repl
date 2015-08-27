@@ -24,7 +24,7 @@
        (println-str value))]))
 
 (defn history-response-error [{:keys [value]}]
-  [:div.history-response-error (.. value -cause -message)])
+  [:div.history-response-error value])
 
 (defn history-unknown [entry]
   [:pre.history-unknown (println-str entry)])
