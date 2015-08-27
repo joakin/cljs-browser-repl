@@ -11,20 +11,36 @@
 (defn cmd-to-history! [cmd]
   (swap! state/history state/add-entry (state/to-repl cmd)))
 
+(defn disable-last-history-stop! []
+  (swap! state/history update
+         (dec (count @state/history))
+         assoc :disabled true))
+
 (defn play-notebook! []
-  (let [{:keys [cmds position]} @state/current-notebook]
-    (when cmds
-    (loop [pos (or position 0)]
-      (let [{:keys [type value silent?] :as cmd} (nth cmds pos)
+  (let [position (:position @state/current-notebook)
+        started? (number? position)
+        {:keys [type] :as cmd} (state/current-command @state/current-notebook)]
+    ; If was stopped, disable the history repl stop and move to next command.
+    (when (and started? (= type :stop))
+      (disable-last-history-stop!)
+      (swap! state/current-notebook update :position inc)))
+
+  ; When there's a command we'll go looping through the notebook and parsing
+  ; the commands.
+  (when-let [{:keys [type] :as cmd} (state/current-command @state/current-notebook)]
+    (loop [pos (or (:position @state/current-notebook) 0)]
+      (let [cmds (:cmds @state/current-notebook)
+            {:keys [type value silent?] :as cmd} (nth cmds pos)
             new-pos (inc pos)]
-        (swap! state/current-notebook assoc :position new-pos)
+        ;; Dispatch commands as necessary
         (case type
           :input (repl-entry! value (not silent?))
           (cmd-to-history! cmd))
-        ;; If the command is stop or we're at the end of the book. Go away
+        ;; If the command is not a stop and we're inside the book, continue
         (when (and (not= type :stop)
                    (< new-pos (count cmds)))
-          (recur new-pos)))))))
+          (swap! state/current-notebook assoc :position new-pos)
+          (recur new-pos))))))
 
 (defn from-gist!
   ([id] (from-gist! id "index"))

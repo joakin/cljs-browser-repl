@@ -54,3 +54,7 @@
    :position 0})
 
 (defonce current-notebook (atom empty-notebook))
+
+(defn current-command [notebook]
+  (let [{:keys [cmds position]} notebook]
+    (nth cmds position)))

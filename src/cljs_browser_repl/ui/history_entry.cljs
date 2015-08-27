@@ -4,9 +4,6 @@
 
 (declare history-entry)
 
-(defn history-input [{:keys [value]}]
-  [:div.history-input value])
-
 (defn- response-with-meta->entry [{:keys [value] :as entry}]
   (let [sub-type (:type (meta value))
         is-value-map? (= (type value) cljs.core/PersistentArrayMap)
@@ -15,44 +12,49 @@
                     (:value value) value)]
     (with-meta (assoc entry :type sub-type :value new-value) nil)))
 
-(defn history-response [{:keys [value] :as entry}]
+(defn emit-input! [emit-fn entry]
+  (let [sel (.toString (.getSelection js/window))
+        value (if (string/blank? sel) (:value entry) sel)
+        payload (response-with-meta->entry (assoc entry :value value))]
+    (emit-fn :input payload)))
+
+(defn history-input [{:keys [emit]} {:keys [value] :as entry}]
+  [:div.history-input
+   {:on-click #(emit-input! emit entry)}
+   value])
+
+(defn history-response [{:keys [emit]} {:keys [value] :as entry}]
   (let [sub-type (:type (meta value))]
     [:div.history-response
-     {:class (if sub-type "" "history-response-cljs")}
+     {:class (if sub-type "" "history-response-cljs")
+      :on-click #(emit-input! emit entry)}
      (if sub-type
        [history-entry nil (response-with-meta->entry entry)]
        (println-str value))]))
 
-(defn history-response-error [{:keys [value]}]
+(defn history-response-error [{:keys [emit]} {:keys [value]}]
   [:div.history-response-error value])
 
-(defn history-unknown [entry]
+(defn history-unknown [{:keys [emit]} entry]
   [:pre.history-unknown (println-str entry)])
 
-(defn history-html [{:keys [value]}]
+(defn history-html [{:keys [emit]} {:keys [value]}]
   [:div.history-html
    {:dangerouslySetInnerHTML {:__html value}}])
 
-(defn history-md [{:keys [value]}]
+(defn history-md [{:keys [emit]} {:keys [value]}]
   [:div.history-markdown
    {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
-(defn history-stop [{:keys [disabled]}]
+(defn history-stop [{:keys [emit]} {:keys [disabled] :as entry}]
   (if disabled
-    nil
+    [:hr]
     [:div.history-stop
+     {:on-click #(emit :continue)}
      [:button "Next"]]))
 
-(def clickable-entries #{:input :error :response})
-
-(defn history-entry [{:keys [on-click]} {:keys [type] :as entry}]
+(defn history-entry [{:keys [emit] :as attrs} {:keys [type] :as entry}]
   [:div.history-entry
-   {:on-click #(if (clickable-entries type)
-                 (on-click
-                   (let [sel (.toString (.getSelection js/window))
-                         value (if (string/blank? sel) (:value entry) sel)]
-                     (response-with-meta->entry
-                       (assoc entry :value value)))))}
    [(case (:type entry)
       :input history-input
       :error history-response-error
@@ -60,4 +62,4 @@
       :html history-html
       :markdown history-md
       :stop history-stop
-      history-unknown) entry]])
+      history-unknown) attrs entry]])

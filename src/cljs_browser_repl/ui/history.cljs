@@ -2,11 +2,11 @@
   (:require [clojure.string :as string]
             [cljs-browser-repl.ui.history-entry :refer [history-entry]]))
 
-(defn- history-raw [{:keys [on-entry-click]} hs]
+(defn- history-raw [{:keys [on-event]} hs]
   [:div.history
    (for [entry hs]
      ^{:key (str "hist-" (:type entry) "-" (:date entry) "-" (str (:value entry)))}
-     [history-entry {:on-click on-entry-click} entry])])
+     [history-entry {:emit on-event} entry])])
 
 (def history
   (with-meta
