@@ -1,6 +1,7 @@
 (ns cljs-browser-repl.actions.notebook
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs-browser-repl.net.gist :as gist]
+            [cljs-browser-repl.net.file :as file]
             [cljs-browser-repl.actions.repl :refer [repl-entry!]]
             [cljs.core.async :refer [<!]]
             [cljs.pprint :refer [pprint]]
@@ -42,3 +43,15 @@
           (reset! state/current-notebook state/empty-notebook)
           (swap! state/current-notebook assoc :id id :gist gist :cmds commands)
           (play-notebook!)))))))
+
+(defn from-filesystem!
+  ([id] (from-filesystem! id "index"))
+  ([id file-name]
+   (reset! state/history [])
+   (go
+     (let [file (<! (file/get! id file-name))
+           commands (file/get-commands file)]
+       (reset! state/current-notebook state/empty-notebook)
+       (swap! state/current-notebook
+              assoc :id id :file-name file-name :file file :cmds commands)
+       (play-notebook!)))))

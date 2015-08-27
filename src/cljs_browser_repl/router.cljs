@@ -47,9 +47,13 @@
 (defroute "/" []
   (repl/insert-repl-intro!))
 
-; search
+; gists
 (defroute "/gist/:id" [id]
   (notebook/from-gist! id))
 
 (defroute "/gist/:id/file/:file" [id file]
   (notebook/from-gist! id file))
+
+; filesystem
+(defroute "/notebook/:id/file/:file" [id file]
+  (notebook/from-filesystem! id file))
