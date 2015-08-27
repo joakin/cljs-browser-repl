@@ -37,6 +37,12 @@
   [:div.history-markdown
    {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
+(defn history-stop [{:keys [disabled]}]
+  (if disabled
+    nil
+    [:div.history-stop
+     [:button "Next"]]))
+
 (def clickable-entries #{:input :error :response})
 
 (defn history-entry [{:keys [on-click]} {:keys [type] :as entry}]
@@ -53,4 +59,5 @@
       :response history-response
       :html history-html
       :markdown history-md
+      :stop history-stop
       history-unknown) entry]])

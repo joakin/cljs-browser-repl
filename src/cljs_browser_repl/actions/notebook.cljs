@@ -20,7 +20,6 @@
         (swap! state/current-notebook assoc :position new-pos)
         (case type
           :input (repl-entry! value (not silent?))
-          :stop nil
           (cmd-to-history! cmd))
         ;; If the command is stop or we're at the end of the book. Go away
         (when (and (not= type :stop)
