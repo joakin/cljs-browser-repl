@@ -39,7 +39,9 @@
             new-pos (inc pos)]
         ;; Dispatch commands as necessary
         (case type
-          :input (repl-entry! value (not silent?))
+          :input (if (:sample? cmd)  ; If just sample, put to history
+                   (cmd-to-history! cmd) ; without running it.
+                   (repl-entry! value (not silent?)))
           (cmd-to-history! cmd))
         ;; If the command is not a stop and we're inside the book, continue
         (when (and (not= type :stop)
