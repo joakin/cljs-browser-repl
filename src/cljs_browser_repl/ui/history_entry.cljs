@@ -46,9 +46,11 @@
   [:div.history-markdown
    {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
+(defn history-separator [] [:hr])
+
 (defn history-stop [{:keys [emit]} {:keys [disabled] :as entry}]
   (if disabled
-    [:hr]
+    [history-separator]
     [:div.history-stop
      {:on-click #(emit :continue)}
      [:button "Next"]]))
@@ -62,4 +64,5 @@
       :html history-html
       :markdown history-md
       :stop history-stop
+      :separator history-separator
       history-unknown) attrs entry]])

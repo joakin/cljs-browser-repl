@@ -11,10 +11,14 @@
 (defn cmd-to-history! [cmd]
   (swap! state/history state/add-entry (state/to-repl cmd)))
 
-(defn disable-last-history-stop! []
-  (swap! state/history update
-         (dec (count @state/history))
-         assoc :disabled true))
+(defn disable-stops! []
+  (swap! state/history
+         (fn [h]
+           (mapv #(if (= (:type %) :stop) (assoc % :disabled true) %) h))))
+
+(defn add-separator! []
+  (when (not= (:type (last @state/history)) :stop)
+    (swap! state/history state/add-entry (state/to-repl {:type :separator}))))
 
 (defn play-notebook! []
   (let [position (:position @state/current-notebook)
@@ -22,7 +26,8 @@
         {:keys [type] :as cmd} (state/current-command @state/current-notebook)]
     ; If was stopped, disable the history repl stop and move to next command.
     (when (and started? (= type :stop))
-      (disable-last-history-stop!)
+      (disable-stops!)
+      (add-separator!)
       (swap! state/current-notebook update :position inc)))
 
   ; When there's a command we'll go looping through the notebook and parsing
