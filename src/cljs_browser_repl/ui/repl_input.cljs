@@ -9,6 +9,10 @@
   "Is an event the Enter key?"
   [e] (= (.-key e ) "Enter"))
 
+(defn escape?
+  "Is an event the Esc key?"
+  [e] (= (.-key e ) "Escape"))
+
 (defn get-val [e] (.. e -target -value))
 
 (defn enter-pressed!
@@ -28,8 +32,12 @@
    [:span.repl-input-pre pre-label]
    [:textarea.repl-input-input
     {:on-key-down (fn [e]
-                    (when (enter? e)
-                      (enter-pressed! e (valid-input? (get-val e)) on-valid-input)))
+                    (cond
+                      (enter? e)
+                      (enter-pressed! e (valid-input? (get-val e)) on-valid-input)
+                      (escape? e)
+                      (.. e -target blur)
+                      ))
      :on-change #(on-change (get-val %))
      :placeholder "Type clojurescript code here"
      :rows 1

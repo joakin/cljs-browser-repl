@@ -6,9 +6,10 @@
             [cljs-browser-repl.actions.notebook :refer [play-notebook!]]
             [cljs-browser-repl.compiler :refer [is-readable?]]
             [cljs-browser-repl.state :as state]
+            [goog.events :as events]
             ))
 
-(defn cljs-browser-repl []
+(defn cljs-browser-repl-raw []
   [:div.cljs-browser-repl
    [top-bar]
    [history {:on-event
@@ -17,9 +18,30 @@
                  :input (new-input! (:value payload))
                  :continue (play-notebook!)
                  ))}
-            @state/history]
+    @state/history]
    [repl-input {:pre-label (str @state/current-ns)
                 :valid-input? is-readable?
                 :on-valid-input repl-entry!
                 :on-change new-input!
                 :value @state/input}]])
+
+(def cljs-browser-repl
+  (with-meta
+    cljs-browser-repl-raw
+    {:component-did-mount
+     (fn [this]
+       (set! (.-shortcutListener this)
+             (fn [e]
+               ; Brittle way of managing app key shortcuts :(
+               (when-not (= (.. e -target -nodeName) "TEXTAREA")
+                 (case (.-keyCode e)
+                   ; n
+                   78 (play-notebook!)
+                   ; i
+                   73 (.focus (.querySelector js/document ".repl-input-input"))
+                   nil))))
+       (events/listen js/window "keyup" (.-shortcutListener this)))
+     :component-will-unmount
+     (fn [this]
+       (events/unlisten js/window "keyup" (.-shortcutListener this)))}
+    ))
