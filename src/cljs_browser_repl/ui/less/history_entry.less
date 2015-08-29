@@ -3,6 +3,14 @@
 .history-entry {
   white-space: pre-wrap;
 
+  pre, code { font-family: @monospaceFontFamily; }
+  pre, p>code {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 2px 4px;
+  }
+
   hr {
     margin: 2em 0;
     border: 0;
