@@ -11,7 +11,8 @@
   "Retrieves a gist by id. Returns a channel that will be filled with a clj-http
   response {:success true :body ...}"
   [id]
-  (http/jsonp (str "https://api.github.com/gists/" id)))
+  (http/get (str "https://api.github.com/gists/" id)
+            {:with-credentials? false}))
 
 (defn invalid-gist [gist err]
   [(to-repl-error (str err "\n\n"
@@ -21,7 +22,7 @@
   "Given a gist it will return a list of commands for the repl to run.
   The gist must not be truncated, must have an index.json file."
   [gist file-name]
-  (let [files (get-in gist [:body :data :files])
+  (let [files (get-in gist [:body :files])
         file (or ((keyword (str file-name ".edn")) files)
                  ((keyword (str file-name ".json")) files))]
     (if (and file
