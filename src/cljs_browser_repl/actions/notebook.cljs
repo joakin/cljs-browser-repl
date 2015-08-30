@@ -55,6 +55,7 @@
    (if (= (:id @state/current-notebook) id)
     (do ; If we are already on the notebook, just swap commands
       (swap! state/current-notebook assoc
+             :position 0
              :cmds (gist/get-commands (:gist @state/current-notebook) file-name))
       (play-notebook!))
     (do ; If it's a new notebook, re-fetch, store and play

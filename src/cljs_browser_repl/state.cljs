@@ -50,6 +50,8 @@
 (def empty-notebook
   {:id nil
    :gist nil
+   :file-name nil
+   :file nil
    :cmds nil
    :position 0})
 
