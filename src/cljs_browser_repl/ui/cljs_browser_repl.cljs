@@ -7,6 +7,8 @@
             [cljs-browser-repl.compiler :refer [is-readable?]]
             [cljs-browser-repl.state :as state]
             [goog.events :as events]
+            [cljs-browser-repl.router :as router]
+            [clojure.string :as string]
             ))
 
 (defn cljs-browser-repl-raw []
@@ -17,6 +19,11 @@
                (case type
                  :input (new-input! (:value payload))
                  :continue (play-notebook!)
+                 :visit-file
+                 (router/navigate!
+                   (string/replace (router/get-token)
+                                   #"/file/(.*)"
+                                   (str "/file/" payload)))
                  ))}
     @state/history]
    [repl-input {:pre-label (str @state/current-ns)
