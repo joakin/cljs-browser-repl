@@ -1,0 +1,69 @@
+[{:type :markdown :value
+  "# Truth and lies
+
+  We've seen CLJS's `true` and `false` are the same as JS's booleans.
+
+  To compare in CLJS we can use the functions `=`, `not` and `not=`."}
+ {:type :input :value "(= 1 1 1)"}
+ {:type :input :value "(= (not false) true)"}
+ {:type :input :value "(not= 5 6)"}
+ {:type :input :value "(not= :blue :red)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Equality comparisons are strict by default in CLJS (It's like using JS's
+  `===` all the time). There's no type coercion insanity. Keep that in mind!"}
+ {:type :input :value "(= \"2\" 2)"}
+ {:type :input :value "(= false nil)"}
+ {:type :stop}
+ {:type :markdown :value
+  "For number comparisons we have `<`, `>`, `<=`, `>=` and the previous functions."}
+ {:type :input :value "(< 2 3)"}
+ {:type :input :value "(< 4 2)"}
+ {:type :input :value "(< 1 2 3 4)"}
+ {:type :input :value "(< 1 2 4 3)"}
+ {:type :stop}
+ {:type :markdown :value
+  "And for boolean logic we have `and` and `or` of course."}
+ {:type :input :value "(and true false)"}
+ {:type :input :value "(or false nil true)"}
+ {:type :stop}
+ {:type :markdown :value
+  "# What is truthy?
+
+  It's important to note that in CLJS **the only** falsey values are `false`
+  and `nil`.
+
+  `0`, `\"\"`, and all these other JS falsy values will behave as `true` in
+  CLJS, so there's no need to safeguard against unexpected zeroes or empty
+  strings as in JS."}
+ {:type :input :value "(and \"\" true)"}
+ {:type :input :value "(and 0 true)"}
+ {:type :input :value "(and nil true)"}
+ {:type :stop}
+ {:type :markdown :value
+  "`and` and `or` are shortcircuiting and behave exactly as in JS, so you can
+  use them as in JS, but taking into account the *truthyness* of values is
+  different."}
+ {:type :input :value "(and true 1 \"last truthy\")"}
+ {:type :input :value "(or false nil :first-truthy \"last truthy\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Fill the blanks
+
+  Try to fix the expressions so that they evaluate to true by filling the `__`
+  gaps!
+
+  Click on the unfinished exercise code to load it into the repl input and then
+  fix it.
+
+  You can also select a part of the code to auto fill the repl input and test
+  parts of the code separately.
+
+  When you are done, go back and click next to finish the lesson."}
+ {:type :input :sample? true :value "(= true (__ (even? 5) (odd? 3)))"}
+ {:type :input :sample? true :value "(= true (__ (and 0 nil 1) nil (or 0 nil \"\")))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Now that we know about handling boolean logic, let's move to [Lesson 4:
+  Conditionals](#/file/4) 👏."}
+ ]

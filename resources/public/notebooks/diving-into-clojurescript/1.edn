@@ -1,0 +1,54 @@
+[{:type :markdown :value
+  "# The repl
+
+  This is a repl, a read-eval-print-loop. Very similar to the developer console
+  on the browser when working with JS.
+
+  The repl is a very important part of ClojureScript development, since it
+  allows us to immediately try the code we write and experiment without having
+  to run the application from the begining."}
+ {:type :stop}
+ {:type :markdown :value
+  "To evaluate a form, focus on the input at the bottom, and write `true`, for
+  example. When you hit enter you will see the entry appear on the history repl
+  at the bottom like this:"}
+ {:type :input :value "true"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Basic types
+
+  Most of the basic types on cljs are the same as in JS.
+
+  That includes booleans, numbers and strings."}
+ {:type :input :value "false"}
+ {:type :input :value "1.02"}
+ {:type :input :value "\"Hi! I'm learning ClojureScript\""}
+ {:type :stop}
+ {:type :markdown :value
+  "In CLJS `null` is called `nil`, but it is equivalent to js's null."}
+ {:type :input :value "nil"}
+ {:type :stop}
+ {:type :markdown :value
+  "There's another basic type called *keywords*. They are similar to strings, but more like constants.
+
+  We usually use keywords as constants or enumerations of values, and as keys in maps/objects.
+
+  To create a keyword just put a colon in front of a symbol, like this:"}
+ {:type :input :value ":hi-friends!"}
+ {:type :input :value ":red"}
+ {:type :input :value ":blue"}
+ {:type :stop}
+ {:type :markdown :value
+  "As you can see in CLJS the rules for a symbol name are more flexible than in JS.
+
+  In JS you can only have ascii chars, _, $ and numbers. In CLJS we can have
+  richer symbols that allow us to express ourselves better. You can use `-` to separate words, and symbols like `!` and `?`"}
+ {:type :input :value ":omg-this-is-awesome!"}
+ {:type :input :value ":done?"}
+ {:type :input :value ":user/name"}
+ {:type :stop}
+ {:type :markdown :value
+  "Now we know about the primitive types, let's move on to more interesting
+  basics, like **[Lesson 2: Playing with
+  functions](#/file/2)**"}
+ ]

@@ -1,0 +1,72 @@
+[{:type :markdown :value
+  "# Conditionals
+
+  It's about time that we start learning how to structure our code.
+
+  The most basic construct in any programming language are conditionals.
+
+  In CLJS we have a few branching constructs that behave as expressions and that will allow us to express our logic."}
+ {:type :stop}
+ {:type :markdown :value
+  "## if
+
+  The most basic and useful construct is the `if`. You call it the same way you
+  do with a function, by wrapping it in parenthesis, followed by the condition,
+  the true body, and the false *else* body.
+
+      (if condition true-branch false-branch)
+
+  The result of the `if` expression will be the result of the evaluated branch,
+  for example:"}
+ {:type :input :value "(if true 1 2)"}
+ {:type :input :value
+  "(if (= :red :blue)
+  (+ 1 2)
+  (* 5 2))"}
+ {:type :stop}
+ {:type :markdown :value
+  "As stated before, most constructs in CLJS are expressions, so you can use
+  them inside other constructs. Think about the CLJS `if` as the ternary
+  operator in JS (`true ? 1 : 2`)."}
+ {:type :input :value "(+ 2 (if false 2 10))"}
+ {:type :stop}
+ {:type :markdown :value
+  "There are a few other if short hand forms, like `if-not`, that help a bit
+  with some syntax sugar."}
+ {:type :input :value "(if-not (= 1 2) 5)"}
+ {:type :stop}
+ {:type :markdown :value
+  "As before, fill the gaps and get the expression to evaluate correctly!"}
+ {:type :input :silent? true :value "(def x 5)"}
+ {:type :input :silent? true :value "(def y 2)"}
+ {:type :input :value "x"}
+ {:type :input :value "y"}
+ {:type :input :sample? true :value
+  "(__ (= (* x 2) (* y 5))
+  \"Nope!\"
+  \"Correct!\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## when
+
+  When you are only interested on the true branch of the condition, you can use
+  `when`, which only takes a true branch. `when` will return the value of the
+  last evaluated expression (you can pass multiple expressions)."}
+ {:type :input :value
+  "(when (< 1 2)
+  (+ 1 2 3) ; This will be executed but not returned
+  (- 3 1)   ; This will be executed but not returned
+  (* 6 6))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Enough braching for now.
+
+  If you want to explore more advanced forms of branching, have a look at:
+
+  - [case](https://clojuredocs.org/clojure.core/case): like JS switch
+  - [cond](https://clojuredocs.org/clojure.core/cond)
+  - [condp](https://clojuredocs.org/clojure.core/condp)
+
+  Let's continue to the useful stuff, [Lesson 5: How do I define variables and
+  functions?](#/file/5)"}
+ ]

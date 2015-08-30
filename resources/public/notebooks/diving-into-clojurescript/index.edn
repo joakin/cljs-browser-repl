@@ -1,0 +1,45 @@
+[{:type :markdown
+  :value
+  "# Welcome to Diving into Clojurescript
+
+  Let's learn Clojurescript interactively in the browser!
+
+  ![Clojurescript](https://i.imgur.com/4Zm72EV.png)"}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "## What is Clojurescript?
+
+  It is language that runs in all JS environments (browser, node.js, etc).
+
+  As a language, is a hosted language with a focus on **functional
+  programming**, remaining very **practical**, **immutability** and great
+  **interoperability** with it's host language (in this case, the JS
+  environment).
+  "}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "## So why is Clojurescript great?
+
+  * Consistently designed and well thought out language.
+  * Immutability is the default.
+  * Programming with values.
+
+  But it is a highly practical language:
+
+  * Can use mutability explicitly when needed.
+  * Easy interop with the ecosystem libraries of JavaScript.
+  "}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "But enough talking. Let's get to learn! We'll appreciate the benefits and
+  elegance of the language when we've learnt more about it 😃
+
+  ---
+
+  For getting started visit **[Lesson 1: Starting with the very
+  basics](#/file/1)**
+  "}
+ ]

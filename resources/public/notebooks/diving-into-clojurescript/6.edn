@@ -1,0 +1,109 @@
+[{:type :markdown :value
+  "# Maps and vectors
+
+  Just as JS has arrays and maps, CLJS provides us also with an immutable
+  version of these data structures.
+
+  ## Vectors
+
+  This is a vector `[1 2 3]`. Vectors are can contain any type of data inside.
+  "}
+ {:type :input :value "(def mixed-vector [1 true :nope nil])"}
+ {:type :stop}
+ {:type :markdown :value
+  "There's **a lot** of functions on the CLJS standard library for dealing with
+  data structures.
+
+  Have a look at the usual suspects: `map`, `filter`, and `reduce` *(there are a lot more)*."}
+ {:type :stop}
+ {:type :markdown :value
+  "Convert the people on the `people` var into distinguished people"}
+ {:type :input :value
+  "(def people [\"John\" \"Mary\" \"Lucas\"])"}
+ {:type :input :sample? true :value
+  "(= __
+  [\"Dr. John\" \"Dr. Mary\" \"Dr. Lucas\"])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Get me the average age of the older than 50."}
+ {:type :input :value
+  "(def ages [55 20 75])"}
+ {:type :input :sample? true :value "(= __ 65)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Awesome! If you want have a look at `count`, `first`, `rest` and `nth`. They are very useful functions."}
+ {:type :input :sample? true :value "(count ages)"}
+ {:type :input :sample? true :value "(range 10)"}
+ {:type :input :sample? true :value "(repeat 3 \"Hi!\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Maps
+
+  The other main data structure are maps. What would we do without them?
+
+  Use `{}` for creating them, followed by `{key value key2 value2}`. No need to
+  use commas. Both the keys and the values can be anything."}
+ {:type :input :value "(def me {:name \"Joaquin\" :age 29})"}
+ {:type :stop}
+ {:type :markdown :value
+  "To get an item of the map we use `get`."}
+ {:type :input :value "(get me :name)"}
+ {:type :markdown :value
+  "We usually use keywords as the keys, because we can use them directly to get values from the map like this:"}
+ {:type :input :value "(:name me)"}
+ {:type :stop}
+ {:type :markdown :value
+
+"There is also get-in for nested keys."}
+ {:type :input :value
+  "(def anon {:name \"Anonymous\"
+           :prefs {:food :shushi}})"}
+ {:type :input :value "(get-in anon [:prefs :food])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Let's do some exercises. Given this data structure with people:"}
+ {:type :input :value
+  "(def users [{:name \"Juan\"   :age 31 :city \"Alicante\"}
+            {:name \"Maria\"  :age 28 :city \"Valencia\"}
+            {:name \"Pablo\"  :age 66 :city \"Barcelona\"}
+            {:name \"German\" :age 51 :city \"Madrid\"}
+            {:name \"David\"  :age 43 :city \"Madrid\"}
+            {:name \"Alba\"   :age 25 :city \"Albacete\"}])"}
+ {:type :markdown :value
+  "Get the average age of all users."}
+ {:type :input :silent? true :value
+  "(defn solution-average-age
+  \"Gets the average age of a collection of x with :age\"
+  [xs]
+  (let [len (count xs)
+        sum (reduce + (map :age xs))]
+    (/ sum len)))"}
+ {:type :input :sample? true :value
+  "(= (average-age users) (solution-average-age users))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Which cities are the +40 years old people from? (*Hint: distinct*)"}
+ {:type :input :sample? true :value
+  "(= (cities-of-elders users) [\"Barcelona\" \"Madrid\"])"}
+ {:type :stop}
+ {:type :markdown :value
+  "List of alphabetically ordered names (*Hint: sort*)"}
+ {:type :input :silent? true :value "(def ordered-users ((comp sort (partial map :name)) users))"}
+ {:type :input :sample? true :value "(= (names users) ordered-users)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Awesome! 💪
+
+  Have a look at these functions on maps: `keys`, `vals`.
+
+  For the whole reference of the libraries on the CLJS core, have a look at the
+  [ClojureDocs reference](https://clojuredocs.org/clojure.core).
+
+  It's also about time to get the link to the [CLJS
+  cheatsheet](http://cljs.info/cheatsheet/), which is very useful. Related to
+  this lessons see the *Collections* and *Sequences* sections, feel free to
+  experiment more in the repl.
+
+  When you're ready, move on to [Lesson 7: Sequences](#/file/7).
+  "}
+ ]

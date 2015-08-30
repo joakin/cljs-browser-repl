@@ -1,0 +1,140 @@
+[{:type :markdown :value
+  "# Giving names to values and functions
+
+  Let's have a look to see how to define variables.
+
+  ## Local variables with `let`
+
+  Use `let` to create local variables that will only exist inside the let body.
+
+    (let [name1 value1 name1 value2 ...]
+      things-to-do
+      things-to-do
+      ...)
+  "}
+ {:type :input :value
+  "(let [n 5]
+  (inc n))"}
+ {:type :input :value "n"}
+ {:type :markdown :value
+  "As you can see, `n` is not defined any more, it was only defined inside the
+  `let` form."}
+ {:type :stop}
+ {:type :markdown :value
+  "Try using `let` and fix the blanks:"}
+ {:type :input :sample? true :value
+  "(_________
+  (if (and (< x y)
+           (= (/ y x) 3))
+    \"Correct!\"))"}
+ {:type :stop}
+ {:type :input :sample? true :value
+  "(let [__ __
+      __ __]
+  (when (= (str a \" \" b) \"ClojureScript rocks\")
+    \"Correct!\"))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Top level variables
+
+  To define a variable in the current namespace/module, we use the `def` form."}
+ {:type :input :value "(def age 29)"}
+ {:type :markdown :value
+  "Then we can use it globally on the current module:"}
+ {:type :input :value "(* age 100)"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Functions
+
+  We can define functions 3 different ways (top-level, anonymous, and short-anonymous).
+
+  ### Anonymous functions
+
+  To define a function we use `fn` like this:
+
+    (fn [params]
+      body)
+  "}
+ {:type :input :value "(fn [n] (+ 1 n))"}
+ {:type :stop}
+ {:type :markdown :value
+  "We can call it by surrounding it with parenthesis as usual:"}
+ {:type :input :value "((fn [n] (+ 1 n)) 5)"}
+ {:type :markdown :value
+  "Or give it a name:"}
+ {:type :input :value
+  "(let [my-AWESOME!-inc (fn [n] (+ 1 n))]
+  (my-AWESOME!-inc 8))"}
+ {:type :stop}
+ {:type :markdown :value
+  "We can also define anonymous functions in a super short form:"}
+ {:type :input :value "(let [short-inc #(+ 1 %)] (short-inc 2))"}
+ {:type :markdown :value
+  "The arguments are `%` `%2` `%3`. Use this only for super short anon functions."}
+ {:type :stop}
+ {:type :markdown :value
+  "### Module functions
+
+  The previous way of defining functions is fine for quick things but for we
+  usually want to define functions on the top level, as we did with `age`
+  before.
+
+  To define a function in the current module we use `defn`.
+
+    (defn function-name \"documentation\" [args]
+      body)
+  "}
+ {:type :input :value
+  "(defn square
+  \"Takes a number and returns the mathematical square of it.\"
+  [n] (* n n))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Now we can use it:"}
+ {:type :input :value "(square 25)"}
+ {:type :markdown :value
+  "Or check it's docs:"}
+ {:type :input :value "(doc square)"}
+ {:type :markdown :value
+  "Documentation is optional, so omit the string if you don't want to write it."}
+ {:type :stop}
+ {:type :markdown :value
+  "Functions are fun.
+
+  Define a function that receives a nice message, and turns it into an evil
+  one.
+
+  Then run the sample test cases and see if it works."}
+ {:type :input :sample? true :value
+  "(and (= \"Hi guys! MUAHAHAHAH!!!!\" (str->evil-str \"Hi guys!\"))
+     (= \"I love dogs. MUAHAHAHAH!!!!\" (str->evil-str \"I love dogs.\")))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Define a function that receives your age, and gives you the number of
+  decades you've lived.
+
+  *Hint: check the `quot` function*
+
+  Then run the sample test cases and see if it works."}
+ {:type :input :sample? true :value
+  "(and (= 2 (decades-lived 26))
+     (= 5 (decades-lived 53))
+     (= 7 (decades-lived 70)))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Define a function that will return true/false when the number argument
+  is a multiple of 2 and 3. (Hint: mod)"}
+ {:type :input :sample? true :value
+  "(and
+  (= true (mult-2-3? 6))
+  (= false (mult-2-3? 50))
+  (= false (mult-2-3? 13))
+  (= true (mult-2-3? 24)))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Okay! 👍 We're almost pro's already.
+
+  A bit tired of strings and numbers, right? Let's dive into more interesting
+  data structures in [Lesson 6: Maps and
+  vectors](#/file/6)"}
+ ]

@@ -1,0 +1,98 @@
+[{:type :markdown :value
+  "# Sequences
+
+  You may have noticed that `map`, `filter`, etc. return a collection that is shown with parenthesis instead of the brackets that you passed in with the vector:
+  "}
+ {:type :input :value "(map inc [1 2 3])"}
+ {:type :stop}
+ {:type :markdown :value
+  "That is because most functions that operate on a sequence return a list.
+
+  If we want to map and return a vector, we can use `mapv`."}
+ {:type :input :value "(mapv inc [1 2 3])"}
+ {:type :markdown :value
+  "Or use `vec` to transform it back to a vector."}
+ {:type :input :value "(vec (map inc [1 2 3]))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## List
+
+  These lists with parenthesis are a `list`, which differ from vectors:
+
+  - **Vectors**: Efficient random access. Efficient append and count.
+  - **Lists**: Efficient prepend.
+  "}
+ {:type :input :value "(= (list 1 2 3) '(1 2 3))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## The `seq` abstraction
+
+  All CLJS data structures operate under a sequence abstraction, which makes
+  all functions work on all data structures:
+  "}
+ {:type :input :value "(map inc [1 2 3])"}
+ {:type :input :value "(map inc '(1 2 3))"}
+ {:type :input :value "(map (fn [[k v]] [k (inc v)]) {:a 1 :b 2 :c 3})"}
+ {:type :stop}
+ {:type :markdown :value
+  "There are a lot of interesting functions to operate on sequences, that's why
+  the core library is so interesting and versatile.
+
+  Here are some interesting examples, feel free to play with them and look
+  their docs up:"}
+ {:type :input :value "(partition 2 (range 10))"}
+ {:type :input :value "(interpose \",\" (repeat 5 \"Joaquin\"))"}
+ {:type :input :value "(interleave (repeat 5 :hi) (range 5))"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Infinite sequences
+
+  There are some functions that will return infinite sequences. We can then use
+  `take` to lazily get values out of them:
+  "}
+ {:type :input :value "(take 5 (repeat \"HI!\"))"}
+ {:type :input :value "(take 10 (iterate inc 1))"}
+ {:type :input :value "(take 10 (iterate #(str % \"0\") \"\"))"}
+ {:type :input :value "(take 5 (cycle [:blue :red]))"}
+ {:type :stop}
+ {:type :markdown :value
+  "# List comprehensions
+
+  We can do list comprehensions as we do in es2015, by using `for`.
+
+  Let's create a list of points of a 4x4 board:"}
+ {:type :input :value
+  "(for [x (range 4) y (range 4)]
+  [x y])"}
+ {:type :stop}
+ {:type :markdown :value "Just with the diagonal points:"}
+ {:type :input :value
+  "(for [x (range 10) y (range 10) :when (= x y)]
+  [x y])"}
+ {:type :markdown :value "We can define variables in scope of the loop:"}
+ {:type :input :value
+  "(for [x (range 10) y (range 10) :when (= x y) :let [prod (* x y)]]
+  [x y prod])"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Playing with TODOs
+
+  Given some todos:"}
+ {:type :input :value
+  "(def todos [\"Buy milk\"
+            \"Read newspaper\"
+            \"Pick up olives\"
+            \"1h jog\"])"}
+ {:type :markdown :value
+  "Let's make a function to display todo items, `todos->str`.
+
+  Produce numbered and line separated text of the todos. Ex
+
+  1. asdf
+  2. fdsa
+  "}
+ {:type :stop}
+ {:type :markdown :value
+  "Well done! 👻. Let's move on to [Lesson 8: Exercising our
+  skills!](#/file/8) and play some more!"}
+ ]
