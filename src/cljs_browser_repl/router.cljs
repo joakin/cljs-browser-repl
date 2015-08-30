@@ -49,7 +49,7 @@
 
 ; gists
 (defroute "/gist/:id" [id]
-  (notebook/from-gist! id))
+  (replace! (str (get-token) "/file/index")))
 
 (defroute "/gist/:id/file/:file" [id file]
   (notebook/from-gist! id file))
