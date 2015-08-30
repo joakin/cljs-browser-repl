@@ -1,0 +1,118 @@
+[{:type :markdown :value
+  "# Let's make some exercises!
+
+  ## FizzBuzz!
+
+  O ye so typical, but so fun 👾!
+
+  Make a function that gives us fizzbuzz from 1 to n (argument to the fn).
+
+    fizzbuzz: multiples of 2 say Fizz
+              multiples of 3 say Buzz
+              multiples of 2 & 3 say FizzBuzz
+
+  Hint: `mod`, `cond`, `range`
+  "}
+ {:type :input :silent? true :value
+  "(defn fizzbuzz-sol [n]
+  (let [mult?  (fn [n d] (= (mod n d) 0))
+        num->fizzbuzz
+        #(cond
+           (and (mult? % 2)
+                (mult? % 3)) \"FizzBuzz\"
+           (mult? % 2) \"Fizz\"
+           (mult? % 3) \"Buzz\"
+           :else %)]
+  (map num->fizzbuzz (range 1 (inc n)))))"}
+ {:type :input :silent? true :value "(def fizzbuzz-25 (fizzbuzz-sol 25))"}
+ {:type :input :sample? true :value "(= (fizzbuzz 25) fizzbuzz-25)"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Modifying data! 😱
+
+  Up until now we haven't modified any data. How are we going to achieve
+  anything if we can't change our data?
+
+  For adding things to vectors or lists, we use `conj`.
+  "}
+ {:type :input :silent? true :value
+  "(def todos [\"Buy milk\"
+            \"Read newspaper\"
+            \"Pick up olives\"
+            \"1h jog\"])"}
+ {:type :input :value "(conj todos \"Learn ClojureScript\")"}
+ {:type :input :value "(conj (range 5) \"To the front?\")"}
+ {:type :markdown :value
+  "Each data-structure gets the data to where its optimized for (vectors at the
+  end, lists at the front)."}
+ {:type :stop}
+ {:type :markdown :value
+  "For maps, we use `assoc` or `assoc-in`."}
+ {:type :input :value "(def me {:name \"Joaquin\" :age 29})"}
+ {:type :input :value "(assoc me :name \"John\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Immutable data FTW!
+
+  Data is immutable in CLJS, so even though we've added things to our vector
+  and map, they still remain the same. The modification was a new data
+  structure."}
+ {:type :input :value "(def not-me (assoc me :name \"John\"))"}
+ {:type :input :value "me"}
+ {:type :input :value "not-me"}
+ {:type :stop}
+ {:type :markdown :value
+  "Working with immutable data is a bit challenging coming from a mutable world
+  like JS, but once you get used to it it's very difficult to go back.
+
+  It gives you guarantees that once something is defined, no functions will
+  modify it without you knowing about it.
+
+  It also means that we're working with values, and we don't have to think
+  about references and objects."}
+ {:type :input :value "(= [1 2 3] [1 2 3])"}
+ {:type :markdown :value
+  "In CLJS we think about values, and those two vectors are the same, so the
+  equality comparison is true.
+
+  As you know, that's not true in JS:"}
+ {:type :input :value "(= #js[1 2 3] #js[1 2 3])"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Sets
+
+  There's another very useful data-structure called a `set`. It's a collection
+  of unique elements. We define it using `#{ ... }`."}
+ {:type :input :value "(def allowed-colors #{:red :blue :yellow})"}
+ {:type :markdown :value "Can't hold duplicate elements"}
+ {:type :input :value "(conj allowed-colors :yellow)"}
+ {:type :stop}
+ {:type :markdown :value
+  "And it's very easy to check for existence of an item on the set:"}
+ {:type :input :value "(if (allowed-colors :red) \"Red allowed!\")"}
+ {:type :input :value
+  "(if (allowed-colors :purple)
+  \"Purple allowed!\"
+  \"Nope\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Parsing keys to game commands
+
+  Make a function that when passed in a key (:up, :down, ...) gives us a game
+  command (:move-up, :move-down, etc.) Here's the list of command <-> keys:
+
+    :move-left  -> :left :a
+    :move-right -> :right :d
+    :shoot -> :space :s :enter
+    :turbo -> :t :w
+    :menu  -> :esc
+  "}
+ {:type :input :sample? true :value
+  "(and (= (key->command :d) :move-right)
+     (= (key->command :left) :move-left)
+     (= (key->command :enter) :shoot)
+     (= (key->command :w) :turbo))"}
+ {:type :markdown :value
+  "Great! Let's move to the next [Lesson 9: Talking to
+  JS](#/file/9)"}
+ ]
