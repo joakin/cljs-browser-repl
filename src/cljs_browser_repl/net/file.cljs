@@ -12,7 +12,7 @@
   be filled with a clj-http response {:success true :body ...}"
   [id file-name]
   (let [resp (chan)
-        url #(str "/notebooks/" id "/" file-name %)]
+        url #(str "notebooks/" id "/" file-name %)]
     (go
       ; Try to get the edn, or the json, or return first failed response
       (let [edn (<! (http/get (url ".edn")))]
