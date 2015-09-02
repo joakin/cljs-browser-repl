@@ -1,0 +1,57 @@
+[{:type :markdown :value
+  "# Talking with JS
+
+  We've mentioned that CLJS is good an accessing the JS environment, and that's
+  true. It's about time to learn how to interact with JS.
+
+  In JS, there is only a global namespace. As you may have seen when defining
+  variables and functions, CLJS returns the name of the namespace/module and
+  the name of the var:
+  "}
+ {:type :input :value "(def counter 0)"}
+ {:type :markdown :value
+  "In the same way that you could access this variable with
+  `cljs.user/counter`, you can access the JS namespace by using the prefix
+  `js/`.
+
+  Try evaluating the following expressions, and check the results:"}
+ {:type :input :sample? true :value "(js/alert \"Hi clojurescripters!\")"}
+ {:type :input :sample? true :value "js/location"}
+ {:type :stop}
+ {:type :markdown :value
+  "Now that we know how to access things on the global scope, let's learn about
+  accessing and manipulating the host objects.
+
+  To make a `new Object` we access the constructor and invoke it by appending
+  a dot:"}
+ {:type :input :value "(def now (js/Date.))"}
+ {:type :stop}
+ {:type :markdown :value
+  "To access properties on the object, we use `(.-prop object)` or
+  `(aget object \"prop\")`."}
+ {:type :input :value "(.-name #js {:name \"Joaquin\"})"}
+ {:type :stop}
+ {:type :markdown :value
+  "To call a method on the object, we use `(.method object args)`."}
+ {:type :input :value "(.now js/Date)"}
+ {:type :markdown :value
+  "That's equivalent to `Date.now()`"}
+ {:type :stop}
+ {:type :markdown :value
+  "We can use the `#js` tag before a data-structure to have it converted to JS at compile time.
+
+  We can also convert between JS and CLJS with `clj->js` and `js->clj`."}
+ {:type :stop}
+ {:type :markdown :value
+  "To set a property on a JS object we can use `set!`:"}
+ {:type :input :value "(def js-map #js {:name \"Joaquin\"})"}
+ {:type :input :value "js-map"}
+ {:type :input :value "(set! (.-name js-map) \"Joan\")"}
+ {:type :input :value "js-map"}
+ {:type :stop}
+ {:type :markdown :value
+  "There are a few more shortcuts for interacting with JS objects, like the `.`
+  and `..` operator. Look them up to learn about how to use them.
+
+  Finally, let's move into the next lesson, [Lesson 10: Mutability in CLJS](#/file/10)"}
+ ]
