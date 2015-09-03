@@ -45,8 +45,7 @@
 (def internal-re
   (js/RegExp. (str "^"
                    (.-origin js/location)
-                   (.-pathname js/location)
-                   "/#/file/(.*)")))
+                   ".*#/file/(.*)")))
 
 (defn history-md [{:keys [emit]} {:keys [value]}]
   [:div.history-markdown
@@ -54,13 +53,11 @@
     #(do
        (.preventDefault %)
        (let [target (.-target %)
-             href (.-href target)
-             internal? (re-seq internal-re href)]
-         (println href)
-         (println internal?)
-         (if internal?
-           (emit :visit-file (second (first internal?)))
-           (.open js/window href))))
+             href (.-href target)]
+         (when href
+           (if-let [internal? (re-seq internal-re href)]
+             (emit :visit-file (second (first internal?)))
+             (.open js/window href)))))
     :dangerouslySetInnerHTML {:__html (md/render value)}}])
 
 (defn history-separator [] [:hr])
