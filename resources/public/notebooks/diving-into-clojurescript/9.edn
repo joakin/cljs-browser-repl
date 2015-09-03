@@ -29,7 +29,7 @@
  {:type :markdown :value
   "To access properties on the object, we use `(.-prop object)` or
   `(aget object \"prop\")`."}
- {:type :input :value "(.-name #js {:name \"Joaquin\"})"}
+ {:type :input :value "(let [me #js {:name \"Joaquin\"}] (.-name me))"}
  {:type :stop}
  {:type :markdown :value
   "To call a method on the object, we use `(.method object args)`."}
