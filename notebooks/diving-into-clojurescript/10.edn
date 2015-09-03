@@ -1,0 +1,54 @@
+[{:type :markdown :value
+  "# Mutability in CLJS
+
+  As you've seen, previously all functions that operate on CLJS data structures
+  do **not mutate** the variable, but return a new one.
+
+  How do we then, store state in our application if every time we change
+  something it gives us a new value and we can't keep a reference to the
+  current state?
+
+  The answer in CLJS is `atom`s. An `atom` is like a JS variable, it is a reference
+  to a data structure.
+
+  CLJS provides functions to change the reference of the atom in a way that
+  allows us to keep the functions that manipulate the data pure and
+  referentially trasparent.
+  "}
+ {:type :stop}
+ {:type :markdown :value
+  "## `atom`
+
+  To create a mutable reference to data, use the function `atom` on some data."}
+ {:type :input :value "(def counter (atom 0))"}
+ {:type :markdown :value
+  "To get the data out of an `atom` use the `@` sign or the `deref` function:"}
+ {:type :input :value "@counter"}
+ {:type :stop}
+ {:type :markdown :value
+  "To update an `atom`, use the function `swap!`:"}
+ {:type :input :value "(swap! counter inc)"}
+ {:type :input :value "(swap! counter + 2)"}
+ {:type :stop}
+ {:type :markdown :value
+  "To reset the value of an `atom`, use the function `reset!`:"}
+ {:type :input :value "(reset! counter {:count 0 :inc-by 2})"}
+ {:type :stop}
+ {:type :markdown :value
+  "We could then define a pure function to update our counter:"}
+ {:type :input :value "(defn inc-counter [c] (assoc c :count (+ (:count c) (:inc-by c))))"}
+ {:type :markdown :value
+  "And use `swap!` when we want to modify the state:"}
+ {:type :input :value "(swap! counter inc-counter)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Atoms are a pretty useful abstraction for managing state, while making it
+  easy to have your logic in pure functions.
+
+  They can also have watchers, peek at `(doc add-watch)` or look on clojuredocs
+  to learn more about them.
+
+  Let's move to the final recap, since we've already learnt a lot!
+
+  [Final recap](#/file/100)"}
+ ]
