@@ -12,7 +12,6 @@
 
 (defonce initialize-repl-ns
   (do
-    (.initializeTouchEvents js/React true)
     ; Init compiler env
     (repl-entry! "(ns cljs.user)" false)
     ; First render
