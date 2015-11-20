@@ -21,17 +21,21 @@
        [[:markdown "
   ### Hi!
 
-  # Welcome to the web clojurescript repl.
+  # Welcome to the clojurescript web repl.
 
   Enter any forms in the input at the bottom. Hit enter to evaluate.
 
   Here are some examples of things to try:"]
         [:input "(doc inc)"]
         [:input "(inc 5)"]
-        [:input "(- 5 3)"]
         [:input "(defn square [x] (* x x))"]
         [:input "(square 6)"]
-        [:markdown "Have fun!
+        [:markdown "
+If you want to learn Clojurescript I would recommend checking out the
+[Diving into ClojureScript](./#/notebook/diving-into-clojurescript/file/index)
+notebook and follow along in this same repl!
+
+Have fun!
 
 ![](http://media2.giphy.com/media/HVr4gFHYIqeti/giphy.gif)"]
         ]))
