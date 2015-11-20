@@ -10,7 +10,8 @@
                  [reagent "0.5.1" :exclusions [cljsjs/react]]
                  [cljsjs/react-with-addons "0.14.3-0"]
                  [secretary "1.2.3"]
-                 [cljs-http "0.1.37"]]
+                 [cljs-http "0.1.37"]
+                 [replumb "0.1.2"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-1"]]

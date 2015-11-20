@@ -1,5 +1,6 @@
 (ns cljs-browser-repl.state
-  (:require [reagent.core :refer [atom]]))
+  (:require [reagent.core :refer [atom]]
+            [replumb.repl :as repl]))
 
 ;; History
 
@@ -39,7 +40,7 @@
 
 ;; Compiler
 
-(defonce current-ns (atom 'cljs.user))
+(defonce current-ns (atom (repl/current-ns)))
 
 ;; UI
 
