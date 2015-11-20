@@ -12,16 +12,16 @@
   be filled with a clj-http response {:success true :body ...}"
   [id file-name]
   (let [resp (chan)
-        url #(str "/notebooks/" id "/" file-name %)]
+        url #(str "notebooks/" id "/" file-name %)]
     (go
       ; Try to get the edn, or the json, or return first failed response
-      (let [edn (<! (http/get (url ".edn")))]
-        (if (:success edn)
-          (>! resp edn)
-          (let [json (<! (http/get (url ".json")))]
+      (let [edn-res (<! (http/get (url ".edn") {:content-type "application/edn"}))]
+        (if (:success edn-res)
+          (>! resp edn-res)
+          (let [json (<! (http/get (url ".json") {:content-type "application/json"}))]
             (if (:success json)
               (>! resp json)
-              (>! resp edn))))))
+              (>! resp edn-res))))))
     resp))
 
 (defn invalid-file [file err]
@@ -32,7 +32,9 @@
   "Given a file response it will return a list of commands for the repl to run."
   [{:keys [success body] :as file}]
   (if success
-    body
+    (if (= (type body) js/String)
+      (edn/read-string body)
+      body)
     (invalid-file file (js/Error. "Request failed"))))
 
 #_(ns cljs.user
