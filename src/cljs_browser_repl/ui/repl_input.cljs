@@ -1,5 +1,6 @@
 (ns cljs-browser-repl.ui.repl-input
-  (:require [clojure.string :as string]))
+  (:require [reagent.core :as reagent]
+            [clojure.string :as string]))
 
 (defn resize [node]
   (set! (.. node -style -height) "auto")
@@ -49,5 +50,5 @@
     repl-input-raw
     {:component-did-update
      (fn [this old-argv]
-       (let [input (.querySelector (.getDOMNode this) ".repl-input-input")]
+       (let [input (.querySelector (reagent/dom-node this) ".repl-input-input")]
          (resize input)))}))

@@ -1,6 +1,8 @@
 (ns cljs-browser-repl.state
   (:require [reagent.core :refer [atom]]
-            [replumb.repl :as repl]))
+            [replumb.core :as replumb]
+            [replumb.repl :as repl]
+            ))
 
 ;; History
 
