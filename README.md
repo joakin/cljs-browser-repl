@@ -28,8 +28,8 @@ Visit the deployed page at
     * [ ] Image url
     * [x] HTML
   * Load history contents from:
-    * [ ] gist id
-    * [ ] url
+    * [x] gist id
+    * [x] url
     * [ ] drag file into repl
   * [ ] Save history contents to gist/url or download file
   * [ ] Edit the history in the repl.
