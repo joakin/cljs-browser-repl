@@ -11,13 +11,18 @@
             [clojure.string :as string]
             ))
 
+(defn focus-input! []
+  (.focus (.querySelector js/document ".repl-input-input")))
+
 (defn cljs-browser-repl-raw []
   [:div.cljs-browser-repl
    [top-bar]
    [history {:on-event
              (fn [type payload]
                (case type
-                 :input (new-input! (:value payload))
+                 :input (do
+                          (new-input! (:value payload))
+                          (focus-input!))
                  :continue (play-notebook!)
                  :visit-file
                  (router/navigate!
@@ -45,7 +50,7 @@
                    ; n
                    78 (play-notebook!)
                    ; i
-                   73 (.focus (.querySelector js/document ".repl-input-input"))
+                   73 (focus-input!)
                    nil))))
        (events/listen js/window "keyup" (.-shortcutListener this)))
      :component-will-unmount
