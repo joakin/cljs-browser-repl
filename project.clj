@@ -5,16 +5,16 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.229"]
-                 [org.clojure/core.async "0.2.391"]
-                 [reagent "0.6.0" :exclusions [cljsjs/react]]
-                 [cljsjs/react-with-addons "15.3.1-0"]
+                 [org.clojure/clojurescript "1.9.562"]
+                 [org.clojure/core.async "0.3.443"]
+                 [reagent "0.6.2" :exclusions [cljsjs/react]]
+                 [cljsjs/react-with-addons "15.6.1-0"]
                  [secretary "1.2.3"]
-                 [cljs-http "0.1.41"]
+                 [cljs-http "0.1.43"]
                  [replumb "0.2.4"]]
 
-  :plugins [[lein-cljsbuild "1.1.4"]
-            [lein-figwheel "0.5.7"]]
+  :plugins [[lein-cljsbuild "1.1.6"]
+            [lein-figwheel "0.5.10"]]
 
   :source-paths ["src"]
 
@@ -49,7 +49,8 @@
              :css-dirs ["resources/public/"] ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
-             :nrepl-port 7888
+             ;; Requires cemerick/piggieback!
+             ;; :nrepl-port 7888
 
              ;; Server Ring Handler (optional)
              ;; if you want to embed a ring handler into the figwheel http-kit
