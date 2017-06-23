@@ -25,7 +25,8 @@
                           ["/src/clj" "/src/cljs" "/js/compiled/out"]
                           fetch-file!)
          {:warning-as-error true
-          :verbose true}))
+         ;:verbose true
+          }))
 
 (defn cljs-read-eval-print!
   [line cb]
