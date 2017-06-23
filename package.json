@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "compile:css": "lessc src/cljs_browser_repl/ui/less/index.less resources/public/style.css",
-    "start": "npm run compile:css",
-    "build": "npm run compile:css -- --clean-css",
+    "figwheel": "rlwrap lein figwheel",
+    "cljsbuild": "lein clean && lein cljsbuild once min",
+    "start": "run-s compile:css figwheel",
+    "build": "run-s \"compile:css -- --clean-css\" cljsbuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
   "devDependencies": {
     "less": "^2.7.2",
-    "less-plugin-clean-css": "^1.5.1"
+    "less-plugin-clean-css": "^1.5.1",
+    "npm-run-all": "^4.0.2"
   },
   "author": "Joaquin Oltra <joaquin@chimeces.com> (http://chimeces.com)",
   "license": "ISC"
