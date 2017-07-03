@@ -57,7 +57,7 @@
 "There is also get-in for nested keys."}
  {:type :input :value
   "(def anon {:name \"Anonymous\"
-           :prefs {:food :shushi}})"}
+           :prefs {:food :sushi}})"}
  {:type :input :value "(get-in anon [:prefs :food])"}
  {:type :stop}
  {:type :markdown :value
