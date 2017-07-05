@@ -1,0 +1,68 @@
+[{:type :markdown :value
+  "# Verdades y mentiras
+
+  Hemos visto que `true` y `false` en CLJS son lo mismo que los booleanos en JS.
+
+  Para comparar en CLJS podemos usar las funciones `=`, `not` y `not=`."}
+ {:type :input :value "(= 1 1 1)"}
+ {:type :input :value "(= (not false) true)"}
+ {:type :input :value "(not= 5 6)"}
+ {:type :input :value "(not= :blue :red)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Las comparaciones de igualdad son estrictas por defecto en CLJS (es como usar
+  `===` en JS todo el tiempo). No hay conversión de tipos implícitas. ¡Tenlo en cuenta!"}
+ {:type :input :value "(= \"2\" 2)"}
+ {:type :input :value "(= false nil)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para comparaciones numéricas tenemos `<`, `>`, `<=`, `>=` y las funciones previas."}
+ {:type :input :value "(< 2 3)"}
+ {:type :input :value "(< 4 2)"}
+ {:type :input :value "(< 1 2 3 4)"}
+ {:type :input :value "(< 1 2 4 3)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Y para la lógica booleana tenemos `and` y `or` por supuesto."}
+ {:type :input :value "(and true false)"}
+ {:type :input :value "(or false nil true)"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Qué es *truthy*?
+
+  Es importante destacar que en CLJS **los únicos** valores falsos son `false`
+  y `nil`.
+
+  `0`, `\"\"`, y todos esos otros valores falsos en JS se comportarán como `true` en
+  CLJS, por tanto no hay necesidad de hacer comprobaciones extra para evitar ceros o cadenas vacías
+  como en JS."}
+ {:type :input :value "(and \"\" true)"}
+ {:type :input :value "(and 0 true)"}
+ {:type :input :value "(and nil true)"}
+ {:type :stop}
+ {:type :markdown :value
+  "`and` y `or` son atajos y se comportan exactamente igual que en JS, así que puedes
+  utilizarlos como en JS, pero teniendo en cuenta que la *veracidad* de los valores es
+  diferente."}
+ {:type :input :value "(and true 1 \"last truthy\")"}
+ {:type :input :value "(or false nil :first-truthy \"last truthy\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Llena los blancos
+
+  Modifica las expresiones para que se evalúen a **true** rellenado los huecos (`__`)!
+
+  Haz click en el código del ejercicio incompleto para cargarlo en el REPL y entonces
+  modificarlo.
+
+  También puedes seleccionar una parte del código para autorrellenar el input del REPL y testear
+  partes del código por separado.
+
+  Cuando acabes, vuelve y haz click en *Next* para finalizar la lección."}
+ {:type :input :sample? true :value "(= true (__ (even? 5) (odd? 3)))"}
+ {:type :input :sample? true :value "(= true (__ (and 0 nil 1) nil (or 0 nil \"\")))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora que sabemos cómo manejar la lógica booleana, pasemos a la [Lección 4:
+  Condicionales](#/file/4) 👏."}
+ ]
