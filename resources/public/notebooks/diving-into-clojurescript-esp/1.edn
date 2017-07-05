@@ -1,0 +1,55 @@
+[{:type :markdown :value
+  "# El REPL
+
+  Esto es un REPL *(read-eval-print-loop)*. Muy similar a la consola de desarrollador
+  en el navegador cuando trabajamos con JavaScript.
+
+  El REPL es una parte muy importante del desarrollo de ClojureScript, puesto que
+  nos permite probar el código que escribimos de manera inmediata y hacer pruebas
+  sin tener que ejecutar la aplicación desde el principio."}
+ {:type :stop}
+ {:type :markdown :value
+  "Para evaluar una expresión, pon el foco en el input a pie de página, y escribe `true`,
+  por ejemplo. Cuando pulses *Enter* verás la entrada aparecer en el historial del REPL, al final,
+  de manera similar a esta:"}
+ {:type :input :value "true"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Tipos básicos
+
+  La mayoría de los tipos básicos en CLJS son los mismos que en JavaScript.
+
+  Eso incluye booleanos, números y cadenas (*strings*)."}
+ {:type :input :value "false"}
+ {:type :input :value "1.02"}
+ {:type :input :value "\"Hi! I'm learning ClojureScript\""}
+ {:type :stop}
+ {:type :markdown :value
+  "En CLJS `null` se denomina `nil`, pero es el equivalente al `null` de JavaScript."}
+ {:type :input :value "nil"}
+ {:type :stop}
+ {:type :markdown :value
+  "Existe otro tipo básico llamado *keywords*. Son similares a las cadenas alfanuméricas (*strings*)
+  pero son mas parecidos a constantes.
+
+  Normalmante usamos keywords como constantes o enumeradores de valores, y como claves en mapas u objetos.
+
+  Para crear una *keyword* sólo hay que poner dos puntos delante del símbolo, como esto:"}
+ {:type :input :value ":hi-friends!"}
+ {:type :input :value ":red"}
+ {:type :input :value ":blue"}
+ {:type :stop}
+ {:type :markdown :value
+  "Como puedes ver en CLJS los reglas para los símbolos son más flexibles que en JS.
+
+  En JS sólo pueden contener caracteres ASCII, `_`, `$` y números. En CLJS podemos
+  usar símbolos más ricos que nos permiten expresarnos mucho mejor. Puedes usar `-` para
+  separar palabras y símbolos como `!` y `?`"}
+ {:type :input :value ":omg-this-is-awesome!"}
+ {:type :input :value ":done?"}
+ {:type :input :value ":user/name"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora que conocemos los tipos primitivos, sigamos con temas básicos más interesantes,
+  como la **[Lección 2: Jugando con funciones](#/file/2)**"}
+ ]
