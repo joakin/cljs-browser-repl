@@ -1,0 +1,107 @@
+[{:type :markdown :value
+  "# Mapas y vectores
+
+  Tal y como JS tiene arrays y mapas, CLJS también nos provee de una versión inmutable de estas estructuras de datos.
+
+  ## Vectores
+
+  Esto es un vector `[1 2 3]`. Los vectores pueden contener cualquier tipo de datos.
+  "}
+ {:type :input :value "(def mixed-vector [1 true :nope nil])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Hay **un montón** de funciones en la librería estándar de CLJS para trabajar con estructuras de datos.
+
+  Echa un vistazo a las más comunes: `map`, `filter`, y `reduce` *(hay muchas más)*."}
+ {:type :stop}
+ {:type :markdown :value
+  "Convierte a las personas de la variable `people` en gente distinguida"}
+ {:type :input :value
+  "(def people [\"John\" \"Mary\" \"Lucas\"])"}
+ {:type :input :sample? true :value
+  "(= __
+  [\"Dr. John\" \"Dr. Mary\" \"Dr. Lucas\"])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Devuélveme la media de edad de los mayores de 50."}
+ {:type :input :value
+  "(def ages [55 20 75])"}
+ {:type :input :sample? true :value "(= __ 65)"}
+ {:type :stop}
+ {:type :markdown :value
+  "¡Genial! Si quieres echa un vistazo a `count`, `first`, `rest` y `nth`. Son funciones muy útiles."}
+ {:type :input :sample? true :value "(count ages)"}
+ {:type :input :sample? true :value "(range 10)"}
+ {:type :input :sample? true :value "(repeat 3 \"Hi!\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Mapas
+
+  La otra estructura de datos principal es el mapa. ¿Qué podemos hacer con ellos?
+
+  Usa `{}` para crear uno, seguido de `{clave1 valor1 clave2 valor2}`. No hacen falta comas.
+  Tanto las claves como los valores pueden ser de cualquier tipo."}
+ {:type :input :value "(def me {:name \"Joaquin\" :age 29})"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para obtener un valor de un mapa usamos `get`."}
+ {:type :input :value "(get me :name)"}
+ {:type :markdown :value
+  "Normalmente se usan *keywords* como claves, porque podemos usarlas para obtener valores de un mapa directamente así:"}
+ {:type :input :value "(:name me)"}
+ {:type :stop}
+ {:type :markdown :value
+
+"También está `get-in` para claves anidadas."}
+ {:type :input :value
+  "(def anon {:name \"Anonymous\"
+           :prefs {:food :sushi}})"}
+ {:type :input :value "(get-in anon [:prefs :food])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Hagamos algunos ejercicios. Dada ésta estructura de datos con gente:"}
+ {:type :input :value
+  "(def users [{:name \"Juan\"   :age 31 :city \"Alicante\"}
+            {:name \"Maria\"  :age 28 :city \"Valencia\"}
+            {:name \"Pablo\"  :age 66 :city \"Barcelona\"}
+            {:name \"German\" :age 51 :city \"Madrid\"}
+            {:name \"David\"  :age 43 :city \"Madrid\"}
+            {:name \"Alba\"   :age 25 :city \"Albacete\"}])"}
+ {:type :markdown :value
+  "Obtén la media de edad de todos los usuarios."}
+ {:type :input :silent? true :value
+  "(defn solution-average-age
+  \"Gets the average age of a collection of x with :age\"
+  [xs]
+  (let [len (count xs)
+        sum (reduce + (map :age xs))]
+    (/ sum len)))"}
+ {:type :input :sample? true :value
+  "(= (average-age users) (solution-average-age users))"}
+ {:type :stop}
+ {:type :markdown :value
+  "¿De qué ciudades son los mayores de 40? (*Pista: `distinct`*)"}
+ {:type :input :sample? true :value
+  "(= (cities-of-elders users) [\"Barcelona\" \"Madrid\"])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Lista de nombres ordenada alfabéticamente (*Pista: `sort`*)"}
+ {:type :input :silent? true :value "(def ordered-users ((comp sort (partial map :name)) users))"}
+ {:type :input :sample? true :value "(= (names users) ordered-users)"}
+ {:type :stop}
+ {:type :markdown :value
+  "¡Genial! 💪
+
+  Échale un vistazo a estas funciones de los mapas: `keys`, `vals`.
+
+  Para una referencia completa de las librerías del core de CLJS, puedes acudir a los
+  [ClojureDocs](https://clojuredocs.org/clojure.core).
+
+  Ya va siendo hora también de poner el link a la [chuleta de CLJS
+  ](http://cljs.info/cheatsheet/), que es muy útil. Relacionadas con esta lección
+  puedes leer las secciones *Collections* y *Sequences*, siéntete libre de
+  experimentar más en el REPL.
+
+  Cuando estés listo, continúa con la [Lección 7: Secuencias](#/file/7).
+  "}
+ ]
