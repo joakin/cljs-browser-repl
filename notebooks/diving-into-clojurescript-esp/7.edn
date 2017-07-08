@@ -1,0 +1,98 @@
+[{:type :markdown :value
+  "# Secuencias
+
+  Puede que te hayas dado cuenta de que `map`, `filter`, etc. devuelven una colección que se muestra entre paréntesis en vez de con los corchetes con los que se define un vector:
+  "}
+ {:type :input :value "(map inc [1 2 3])"}
+ {:type :stop}
+ {:type :markdown :value
+  "Esto se debe a que la mayoría de funciones que se aplican sobre una secuencia devuelven una lista.
+
+  Si queremos mapear y devolver un vector, podemos usar `mapv`."}
+ {:type :input :value "(mapv inc [1 2 3])"}
+ {:type :markdown :value
+  "O usar `vec` para volver a transformarla en vector."}
+ {:type :input :value "(vec (map inc [1 2 3]))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Lista
+
+  Esas listas entre paréntesis son una `list`, que difieren de los vectores:
+
+  - **Vectores**: Acceso aleatorio eficiente. Eficiente añadir y contar elementos.
+  - **Listas**: Eficiente *prepend*.
+  "}
+ {:type :input :value "(= (list 1 2 3) '(1 2 3))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## La abstracción `seq`
+
+  Todas las estructuras de datos en CLJS operan sobre una abstracción de la secuencia, que hace
+  que todas las funciones funcionen con todas las estructuras de datos:
+  "}
+ {:type :input :value "(map inc [1 2 3])"}
+ {:type :input :value "(map inc '(1 2 3))"}
+ {:type :input :value "(map (fn [[k v]] [k (inc v)]) {:a 1 :b 2 :c 3})"}
+ {:type :stop}
+ {:type :markdown :value
+  "Hay un montón de funciones interesantes para operar con secuencias, por eso
+  el core de la librería es tan interesante y versátil.
+
+  He aquí algunos exemplos interesantes, siéntete libre de jugar con ellas y de buscar
+  su documentación:"}
+ {:type :input :value "(partition 2 (range 10))"}
+ {:type :input :value "(interpose \",\" (repeat 5 \"Joaquin\"))"}
+ {:type :input :value "(interleave (repeat 5 :hi) (range 5))"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Secuencias infinitas
+
+  Hay algunas funciones que devolverán secuencias infinitas. Podemos usar
+  `take` para obtener valores de manera diferida:
+  "}
+ {:type :input :value "(take 5 (repeat \"HI!\"))"}
+ {:type :input :value "(take 10 (iterate inc 1))"}
+ {:type :input :value "(take 10 (iterate #(str % \"0\") \"\"))"}
+ {:type :input :value "(take 5 (cycle [:blue :red]))"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Comprensiones de lista
+
+  Podemos hacer comprensiones de lista como en es2015, utilizando `for`.
+
+  Vamos a crear una lista de puntos para un tablero de 4x4:"}
+ {:type :input :value
+  "(for [x (range 4) y (range 4)]
+  [x y])"}
+ {:type :stop}
+ {:type :markdown :value "Ahora sólo con los puntos de la diagonal:"}
+ {:type :input :value
+  "(for [x (range 10) y (range 10) :when (= x y)]
+  [x y])"}
+ {:type :markdown :value "Podemos definir variables en el contexto del bucle:"}
+ {:type :input :value
+  "(for [x (range 10) y (range 10) :when (= x y) :let [prod (* x y)]]
+  [x y prod])"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Jugando con TODOs
+
+  Dada la siguiente lista de tareas (*TODOs*):"}
+ {:type :input :value
+  "(def todos [\"Buy milk\"
+            \"Read newspaper\"
+            \"Pick up olives\"
+            \"1h jog\"])"}
+ {:type :markdown :value
+  "Hagamos una función que devuelva cada tarea, `todos->str`.
+
+  Genera una lista numerada de tareas cada una en su propia línea. Ejemplo:
+
+  1. asdf
+  2. fdsa
+  "}
+ {:type :stop}
+ {:type :markdown :value
+  "¡Bien hecho! 👻. Continuemos con la [Lección 8: Ejercitando nuestras
+  habilidades!](#/file/8) y juguemos un poco más!"}
+ ]
