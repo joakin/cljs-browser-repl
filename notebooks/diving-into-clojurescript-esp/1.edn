@@ -4,7 +4,7 @@
   Esto es un REPL *(read-eval-print-loop)*. Muy similar a la consola de desarrollador
   en el navegador cuando trabajamos con JavaScript.
 
-  El REPL es una parte muy importante del desarrollo de ClojureScript, puesto que
+  El REPL es una parte muy importante del desarrollo en ClojureScript, puesto que
   nos permite probar el código que escribimos de manera inmediata y hacer pruebas
   sin tener que ejecutar la aplicación desde el principio."}
  {:type :stop}
