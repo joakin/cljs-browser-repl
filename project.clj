@@ -5,15 +5,15 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.562"]
+                 [org.clojure/clojurescript "1.9.671"]
                  [org.clojure/core.async "0.3.443"]
-                 [reagent "0.6.2"]
+                 [reagent "0.7.0"]
                  [secretary "1.2.3"]
                  [cljs-http "0.1.43"]
                  [replumb "0.2.4"]]
 
   :plugins [[lein-cljsbuild "1.1.6"]
-            [lein-figwheel "0.5.10"]]
+            [lein-figwheel "0.5.11"]]
 
   :source-paths ["src"]
 
