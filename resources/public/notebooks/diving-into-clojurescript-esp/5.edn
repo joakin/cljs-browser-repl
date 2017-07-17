@@ -1,0 +1,137 @@
+[{:type :markdown :value
+  "# Nombrando variables y funciones
+
+  Echemos un vistazo a cómo se declaran las variables.
+
+  ## Variables locales con `let`
+
+  Usa `let` para crear variables locales que sólo existirán dentro del cuerpo del *let*.
+
+    (let [nombre1 valor1 nombre2 valor2 ...]
+      instrucción 1
+      instrucción 2
+      ...)
+  "}
+ {:type :input :value
+  "(let [n 5]
+  (inc n))"}
+ {:type :input :value "n"}
+ {:type :markdown :value
+  "Como puedes ver, `n` ya no está definido, sólo estaba definido dentro de la construcción
+  `let`."}
+ {:type :stop}
+ {:type :markdown :value
+  "Intentar usar `let` para llenar los huecos:"}
+ {:type :input :sample? true :value
+  "(_________
+  (if (and (< x y)
+           (= (/ y x) 3))
+    \"Correct!\"))"}
+ {:type :stop}
+ {:type :input :sample? true :value
+  "(let [__ __
+      __ __]
+  (when (= (str a \" \" b) \"ClojureScript rocks\")
+    \"Correct!\"))"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Variables en el nivel superior
+
+  Para definir variables en el espacio de nombres/módulo actual, usamos la forma `def`."}
+ {:type :input :value "(def age 29)"}
+ {:type :markdown :value
+  "De esta manera podemos usarla globalmente en el módulo actual:"}
+ {:type :input :value "(* age 100)"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Funciones
+
+  Podemos declarar funciones de 3 formas diferentes (de primer nivel, anónimas, y anónimas abreviadas).
+
+  ### Funciones anónimas
+
+  Para definir una función usamos `fn` de esta manera:
+
+    (fn [parámetros]
+      cuerpo)
+  "}
+ {:type :input :value "(fn [n] (+ 1 n))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Podemos llamarla envolviéndola en paréntesis como siempre:"}
+ {:type :input :value "((fn [n] (+ 1 n)) 5)"}
+ {:type :markdown :value
+  "O asignarle un nombre:"}
+ {:type :input :value
+  "(let [my-AWESOME!-inc (fn [n] (+ 1 n))]
+  (my-AWESOME!-inc 8))"}
+ {:type :stop}
+ {:type :markdown :value
+  "También podemos declarar funciones anónimas de forma súper abreviada:"}
+ {:type :input :value "(let [short-inc #(+ 1 %)] (short-inc 2))"}
+ {:type :markdown :value
+  "Los argumentos son `%` `%2` `%3`. Usa esto sólo para hacer funciones anónimas extra cortas."}
+ {:type :stop}
+ {:type :markdown :value
+  "### Funciones de un módulo
+
+  La manera anterior de definir funciones está bien para cosas rápidas pero normalmente queremos declarar
+  funciones en el nivel superior, como hicimos antes con la variable `age`.
+
+  Para definir una función en el módulo actual usamos `defn`.
+
+    (defn nombre-de-la-función \"documentación\" [argumentos]
+      cuerpo)
+  "}
+ {:type :input :value
+  "(defn square
+  \"Recibe un número y devuelve su cuadrado matemático.\"
+  [n] (* n n))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora podemos utilizarla:"}
+ {:type :input :value "(square 25)"}
+ {:type :markdown :value
+  "O consultar su documentación:"}
+ {:type :input :value "(doc square)"}
+ {:type :markdown :value
+  "La documentación es opcional, así que omite su descripción si no quieres escribirla."}
+ {:type :stop}
+ {:type :markdown :value
+  "Las funciones son divertidas.
+
+  Define una función que reciba un mensaje bonito y lo convierta en uno malvado.
+
+  Ahora corre los casos de test y ve si funciona."}
+ {:type :input :sample? true :value
+  "(and (= \"Hi guys! MUAHAHAHAH!!!!\" (str->evil-str \"Hi guys!\"))
+     (= \"I love dogs. MUAHAHAHAH!!!!\" (str->evil-str \"I love dogs.\")))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Define una función que reciba tu edad y devuelva el número de décadas que has vivido.
+
+  *Pista: busca la función `quot`*
+
+  Ahora corre los casos de test y ve si funciona."}
+ {:type :input :sample? true :value
+  "(and (= 2 (decades-lived 26))
+     (= 5 (decades-lived 53))
+     (= 7 (decades-lived 70)))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Define una función que devuelva true/false cuando su argumento
+  sea múltiplo de 2 y 3. (Pista: `mod`)"}
+ {:type :input :sample? true :value
+  "(and
+  (= true (mult-2-3? 6))
+  (= false (mult-2-3? 50))
+  (= false (mult-2-3? 13))
+  (= true (mult-2-3? 24)))"}
+ {:type :stop}
+ {:type :markdown :value
+  "OK! 👍 Ya casi somos profesionales.
+
+  Estás un poco harto/a de *strings* y números, ¿verdad? Adéntremonos en otras
+  estructuras de datos más interesantes en la [Lección 6: Mapas y
+  vectores](#/file/6)"}
+ ]
