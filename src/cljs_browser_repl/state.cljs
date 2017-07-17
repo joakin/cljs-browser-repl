@@ -34,8 +34,12 @@
         [:input "(square 6)"]
         [:markdown "
 If you want to learn Clojurescript I would recommend checking out the
-[Diving into ClojureScript](./#/notebook/diving-into-clojurescript/file/index)
-notebook and follow along in this same repl!
+interactive workshop **Diving into ClojureScript** that uses this same repl:
+
+* [English: Diving into ClojureScript](./#/notebook/diving-into-clojurescript/file/index)
+* [Español: Introduccion a ClojureScript](./#/notebook/diving-into-clojurescript-esp/file/index)
+
+More info in [clojurescript.org](https://clojurescript.org/)
 
 Have fun!
 
