@@ -1,0 +1,114 @@
+[{:type :markdown :value
+  "# ¡Hagamos algunos ejercicios!
+
+  ## FizzBuzz!
+
+  Ufff qué típico, pero es divertido! 👾
+
+  Define una función que devuelva fizzbuzz desde 1 hasta `n` (argumento de la función).
+
+    fizzbuzz: múltiplos de 2 devuelve Fizz
+              múltiplos de 3 devuelve Buzz
+              múltiplos de 2 & 3 devuelve FizzBuzz
+
+  Pista: `mod`, `cond`, `range`
+  "}
+ {:type :input :silent? true :value
+  "(defn fizzbuzz-sol [n]
+  (let [mult?  (fn [n d] (= (mod n d) 0))
+        num->fizzbuzz
+        #(cond
+           (and (mult? % 2)
+                (mult? % 3)) \"FizzBuzz\"
+           (mult? % 2) \"Fizz\"
+           (mult? % 3) \"Buzz\"
+           :else %)]
+  (map num->fizzbuzz (range 1 (inc n)))))"}
+ {:type :input :silent? true :value "(def fizzbuzz-25 (fizzbuzz-sol 25))"}
+ {:type :input :sample? true :value "(= (fizzbuzz 25) fizzbuzz-25)"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Modificando datos! 😱
+
+  Hasta ahora no hemos modificado ningún dato. ¿Cómo vamos a poder hacer cualquier cosa
+  si no podemos modificar nuestros datos?
+
+  Para añadir elementos a vectores o listas, usamos `conj`.
+  "}
+ {:type :input :silent? true :value
+  "(def todos [\"Buy milk\"
+            \"Read newspaper\"
+            \"Pick up olives\"
+            \"1h jog\"])"}
+ {:type :input :value "(conj todos \"Learn ClojureScript\")"}
+ {:type :input :value "(conj (range 5) \"To the front?\")"}
+ {:type :markdown :value
+  "Cada estructura de datos añade elementos donde sea más óptimo (vectores al final,
+  listas al principio)."}
+ {:type :stop}
+ {:type :markdown :value
+  "Para mapas, usamos `assoc` o `assoc-in`."}
+ {:type :input :value "(def me {:name \"Joaquin\" :age 29})"}
+ {:type :input :value "(assoc me :name \"John\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "# Datos inmutables FTW!
+
+  Los datos son inmutables en CLJS, así que incluso añadiendo datos a nuestro vector o mapa,
+  siguen siendo iguales. La modificación es una nueva estructura de datos."}
+ {:type :input :value "(def not-me (assoc me :name \"John\"))"}
+ {:type :input :value "me"}
+ {:type :input :value "not-me"}
+ {:type :stop}
+ {:type :markdown :value
+  "Trabajar con datos inmutables es un desafío al principio cuando vienes de mundos mutables
+  como JS, pero una vez te acostumbras es difícil mirar atrás.
+
+  Te da garantías de que una vez definido algo, ninguna función podrá modificarlo sin que tú lo sepas.
+
+  También implica que estamos trabajando con valores, no tenemos que pensar en referencias ni objetos."}
+ {:type :input :value "(= [1 2 3] [1 2 3])"}
+ {:type :markdown :value
+  "En CLJS pensamos en valores, y esos dos vectores son iguales, así que la comparación de igualdad devuelve `true`.
+
+  Como ya sabes, esto no es así en JS:"}
+ {:type :input :value "(= #js[1 2 3] #js[1 2 3])"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Sets
+
+  Hay otra estructura de datos muy útil llamada `set`. Es una colección de elementos
+  únicos. La definimos usando `#{ ... }`."}
+ {:type :input :value "(def allowed-colors #{:red :blue :yellow})"}
+ {:type :markdown :value "No puede contener elementos duplicados"}
+ {:type :input :value "(conj allowed-colors :yellow)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Y es muy fácil comprobar si existe un elemento dentro del set:"}
+ {:type :input :value "(if (allowed-colors :red) \"Red allowed!\")"}
+ {:type :input :value
+  "(if (allowed-colors :purple)
+  \"Purple allowed!\"
+  \"Nope\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## Convirtiendo teclas en comandos de un juego
+
+  Define una función que recibiendo una tecla (:up, :down, ...) nos devuelva el comando
+  de un juego (:move-up, :move-down, etc.) Aquí está la lista de comandos <-> teclas:
+
+    :move-left  -> :left :a
+    :move-right -> :right :d
+    :shoot -> :space :s :enter
+    :turbo -> :t :w
+    :menu  -> :esc
+  "}
+ {:type :input :sample? true :value
+  "(and (= (key->command :d) :move-right)
+     (= (key->command :left) :move-left)
+     (= (key->command :enter) :shoot)
+     (= (key->command :w) :turbo))"}
+ {:type :markdown :value
+  "¡Genial! Sigamos con la [Lección 9: Hablando con
+  JS](#/file/9)"}
+ ]

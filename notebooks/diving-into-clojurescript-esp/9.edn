@@ -1,0 +1,57 @@
+[{:type :markdown :value
+  "# Hablando con JS
+
+  Hemos mencionado antes que CLJS es bueno accediendo al entorno JS, y es verdad.
+  Ya va siendo hora de que aprendamos cómo interactuar con JS.
+
+  En JS, sólo hay un espacio de nombres global. Puede que te hayas dado cuenta de que
+  al declarar variables y funciones, CLJS devuelve el nombre del espacio_de_nombres/módulo y
+  el nombre de la variable:
+  "}
+ {:type :input :value "(def counter 0)"}
+ {:type :markdown :value
+  "De la misma manera en la que puedes acceder a esta variable en
+  `cljs.user/counter`, puedes acceder al espacio de nombres de JS usando el prefixo
+  `js/`.
+
+  Prueba evaluando las siguientes expresiones, y comprueba los resultados:"}
+ {:type :input :sample? true :value "(js/alert \"Hi clojurescripters!\")"}
+ {:type :input :sample? true :value "js/location"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora que sabemos cómo se accede al ámbito global, aprendamos cómo se accede
+  y se modifican los objetos anfitriones.
+
+  Para instanciar un `new Object` accedemos al constructor y lo invocamos con un
+  punto:"}
+ {:type :input :value "(def now (js/Date.))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para acceder a propiedades del objeto, usamos `(.-propiedad objeto)` o
+  `(aget objeto \"propiedad\")`."}
+ {:type :input :value "(let [me #js {:name \"Joaquin\"}] (.-name me))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para invocar un método del objeto, utilizamos `(.método objeto argumentos)`."}
+ {:type :input :value "(.now js/Date)"}
+ {:type :markdown :value
+  "Esto es equivalente a `Date.now()`"}
+ {:type :stop}
+ {:type :markdown :value
+  "Podemos usar la etiqueta `#js` antes de una estructura de datos para convertirla en JS en tiempo de compilación.
+
+  También podemos convertir entre JS y CLJS con `clj->js` y `js->clj`."}
+ {:type :stop}
+ {:type :markdown :value
+  "Para *setear* una propiedad en un objeto JS usamos `set!`:"}
+ {:type :input :value "(def js-map #js {:name \"Joaquin\"})"}
+ {:type :input :value "js-map"}
+ {:type :input :value "(set! (.-name js-map) \"Joan\")"}
+ {:type :input :value "js-map"}
+ {:type :stop}
+ {:type :markdown :value
+  "Hay algunas abreviaturas más para interactuar con objetos de JS, como el operador `.`
+  y `..`. Búscalos para aprender cómo se utilizan.
+
+  Finalmente, avancemos hacia la siguiente lección, [Lección 10: Mutabilidad en CLJS](#/file/10)"}
+ ]

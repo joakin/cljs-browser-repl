@@ -1,0 +1,38 @@
+[{:type :markdown :value
+  "# ¡Enhorabuena!
+
+  Has aprendido mucho sobre el lenguaje CLJS, y ahora ya estás listo para 
+  aprender con proyectos reales.
+
+  Con el tiempo, descubrirás otros aspectos del lenguaje, como el *destructuring*
+  (del que no hemos hablado), requerir librerías y espacios de nombres, y montar
+  proyectos.
+
+  De momento, te recomiendo encarecidamente que te instales
+  [Leiningen](http://leiningen.org/), que es la herramienta de gestión de proyectos de Clojure
+  (algo así como el `npm` para node) y que intentes crear un nuevo proyecto utilizando
+  alguna de las increíbles plantillas que la comunidad ha creado.
+
+  Por ejemplo, para probar la alucinante recarga de código en tiempo real, y *reagent* u *om* para construir una web app, haz:
+
+    lein new figwheel my-awesome-project -- --reagent
+    # o
+    lein new figwheel my-awesome-project -- --om
+
+  Luego lee el *README* para saber cómo empezar el proyecto.
+
+  ## Dudas y comunidad
+
+  Si tienes dudas y no puedes encontrar respuestas online, prueba suerte en
+  `#clojurescript` en irc (freenode), la etiqueta #clojurescript en StackOverflow,
+  o el
+  [mailing
+  list de ClojureScript](https://groups.google.com/forum/#!forum/clojurescript). La comunidad
+  es increíble y está siempre dispuesta a ayudar.
+
+  ¡Te deseo lo mejor en tus próximas aventuras! Por favor, ponte en contacto con nosotros a través del [seguimiento
+  de incidencias](https://github.com/joakin/cljs-browser-repl/issues) y cuéntanos
+  cualquier cosa buena o mala, me encantaría saber de ti!
+
+  ![back-to-the-future](http://media1.giphy.com/media/12xvz9NssSkaS4/giphy.gif)"}
+ ]

@@ -1,0 +1,49 @@
+[{:type :markdown :value
+  "# Llamando funciones
+
+  Para llamar a una función, simplemente métela entre paréntesis, en vez
+  de poner los paréntesis después de la llamada a la función, como hacemos en JS."}
+ {:type :input :value "(inc 5) ; Let's increment 5\n; In JS we would do inc(5)"}
+ {:type :input :value "(inc (inc 5))"}
+ {:type :stop}
+ {:type :markdown :value
+  "¿Cómo sabemos lo que hace una función?
+
+  En CLJS es muy fácil. Puedes utilizar el comando `doc` y llamarlo
+  con el nombre de una función, esto te dará la documentación de dicha función.
+  "}
+ {:type :input :value "(doc +)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora sabes por la documentación cómo se suman números, como puedes ver
+  te dice que puedes llamar a la función con 0, 1, 2 o más argumentos, y
+  una descripción de lo que la función hace.
+
+  ¡Vamos a probarlo!"}
+ {:type :input :value "(+)"}
+ {:type :input :value "(+ 1)"}
+ {:type :input :value "(+ 1 3)"}
+ {:type :input :value "(+ 4 5 6 7)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Siéntete libre de jugar con otras funciones matemáticas como `-`, `*` y `/`.
+
+  Como nos sentimos con afán de aventura, probemos también con `str`, `even?` y
+  `odd?`, y `inc` y `dec` por ejemplo 👊.
+
+  ¿Puedes adivinar qué hace la función `number?`?
+
+  Cuando estés listo, haz click en *Next* para continuar 😛."}
+ {:type :stop}
+ {:type :markdown :value
+  "¡Genial! Hemos aprendido a invocar funciones y a buscar
+  lo que hace una función. ¡Esto se pone interesante!
+
+  Aquí hay una referencia rápida de estas funciones básicas: [ClojureDocs Quick
+  Ref](https://clojuredocs.org/quickref). En general,
+  [ClojureDocs](https://clojuredocs.org) es una buen recurso para buscar
+  documentación y ejemplos de uso de dichas funciones, como por ejemplo
+  [even?](https://clojuredocs.org/clojure.core/even_q).
+
+  Pasemos a la **[Lección 3: Verdades y mentiras](#/file/3)**"}
+ ]
