@@ -9,7 +9,8 @@
     "cljsbuild": "lein clean && lein cljsbuild once min",
     "start": "run-s compile:css figwheel",
     "build": "run-s \"compile:css -- --clean-css\" cljsbuild",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "outdated": "npm outdated && lein ancient :all"
   },
   "dependencies": {},
   "devDependencies": {
