@@ -1,0 +1,52 @@
+[{:type :markdown :value
+  "# Mutabilidad en CLJS
+
+  Como habrás visto, todas las funciones anteriores que operan sobre estructuras de datos en CLJS
+  **no mutan** la variable, sino que devuelven una nueva.
+
+  ¿Cómo hacemos entonces, para almacenar el estado de nuestra aplicación si cada vez que cambiamos cualquier
+  cosa nos devuelve un valor nuevo y no podemos conservar la referencia al estado actual?
+
+  La respuesta son los `atom`s de CLJS. Un `atom` es como una variable de JS, es una referencia
+  a una estructura de datos.
+
+  CLJS provee funciones para cambiar la referencia del *atom* de manera que nos permite conservar la pureza
+  de las funciones que manipulan los datos y la transparencia referencial.
+  "}
+ {:type :stop}
+ {:type :markdown :value
+  "## `atom`
+
+  Para crear una referencia mutable de los datos, usa la función `atom` en algún valor."}
+ {:type :input :value "(def counter (atom 0))"}
+ {:type :markdown :value
+  "Para extraer datos de un `atom` usa el símbolo `@` o la función `deref`:"}
+ {:type :input :value "@counter"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para actualizar un `atom`, usa la función `swap!`:"}
+ {:type :input :value "(swap! counter inc)"}
+ {:type :input :value "(swap! counter + 2)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Para resetear el valor de un `atom`, usa la función `reset!`:"}
+ {:type :input :value "(reset! counter {:count 0 :inc-by 2})"}
+ {:type :stop}
+ {:type :markdown :value
+  "Ahora podríamos definir una función pura para actualizar nuestro contador:"}
+ {:type :input :value "(defn inc-counter [c] (assoc c :count (+ (:count c) (:inc-by c))))"}
+ {:type :markdown :value
+  "Y utilizar `swap!` cada vez que queramos modificar el estado:"}
+ {:type :input :value "(swap! counter inc-counter)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Los *atoms* son una abstracción muy útil para manejar el estado, facilitando
+  tener nuestra lógica en funciones puras.
+
+  También pueden tener *watchers*, mira `(doc add-watch)` o ve a los clojuredocs
+  para aprender más sobre ellos.
+
+  Vayamos ahora a la recapitulación final, hemos aprendido un montón!
+
+  [Recapitulación final](#/file/100)"}
+ ]

@@ -1,0 +1,43 @@
+[{:type :markdown
+  :value
+  "# Bienvenido a Introducción a ClojureScript
+
+  ¡Aprendamos ClojureScript interactivamente en el navegador!
+
+  ![Clojurescript](https://i.imgur.com/4Zm72EV.png)"}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "## Qué es ClojureScript?
+
+  Es un lenguaje que corre en todos los entornos JavaScript (navegador, Node.js, etc).
+
+  Como lenguaje, es un lenguaje huésped centrado en la **programación funcional**,
+  permaneciendo así **práctico**, **inmutable** y con gran **interoperabilidad** con
+  su lenguaje anfitrión (en este caso, el entorno JavaScript).
+  "}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "## ¿Por qué mola tanto ClojureScript?
+
+  * Es un lenguaje bien pensado y diseñado de forma consistente.
+  * La inmutabilidad viene por defecto.
+  * Se programa con valores.
+
+  Pero también es un lenguaje altamente práctico:
+
+  * Se puede usar mutabilidad explícitamente cuando sea necesario.
+  * Fácil interoperabilidad con el ecosistema de librerías de JavaScript.
+  "}
+ {:type :stop}
+ {:type :markdown
+  :value
+  "Basta de cháchara. ¡Vamos al tema! Apreciaremos los beneficios y la
+  elegancia del lenguaje cuando hayamos aprendido más sobre él 😃
+
+  ---
+
+  Para comenzar visita la **[Lección 1: Empezando por lo básico](#/file/1)**.
+  "}
+ ]

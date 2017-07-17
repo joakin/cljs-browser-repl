@@ -1,0 +1,72 @@
+[{:type :markdown :value
+  "# Condicionales
+
+  Ya va siendo hora de que aprendamos cómo estructurar nuestro código.
+
+  La construcción más básica en cualquier lenguaje de programación son los condicionales.
+
+  En CLJS tenemos algunas construcciones ramificadas que se comportan como expresiones y que nos permitirán definir nuestra lógica."}
+ {:type :stop}
+ {:type :markdown :value
+  "## if
+
+  La construcción más básica y práctica es el `if`. Se le llama de la misma forma
+  en que se llama a una función, envolviéndolo en paréntesis, seguido por la condición,
+  el cuerpo de la función si es cierta, y el cuerpo de la función si es falsa (el *else*).
+
+      (if condición ramificación-true ramificación-false)
+
+  El resultado de la expresión `if` será el resultado de la ramificación evaluada,
+  por ejemplo:"}
+ {:type :input :value "(if true 1 2)"}
+ {:type :input :value
+  "(if (= :red :blue)
+  (+ 1 2)
+  (* 5 2))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Como ya hemos dicho, la mayoría de las construcciones en CLJS son expresiones, así que puedes utilizarlas
+  dentro de otras construcciones. Piensa en el `if` de CLJS como si fuera el operador
+  ternario de JS (`true ? 1 : 2`)."}
+ {:type :input :value "(+ 2 (if false 2 10))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Hay otros métodos *if* abreviados, como `if-not`, que ayuda un poco
+  como azúcar sintáctico."}
+ {:type :input :value "(if-not (= 1 2) 5)"}
+ {:type :stop}
+ {:type :markdown :value
+  "Igual que antes, ¡rellena los huecos y consigue que la expresión se evalúe correctamente!"}
+ {:type :input :silent? true :value "(def x 5)"}
+ {:type :input :silent? true :value "(def y 2)"}
+ {:type :input :value "x"}
+ {:type :input :value "y"}
+ {:type :input :sample? true :value
+  "(__ (= (* x 2) (* y 5))
+  \"Nope!\"
+  \"Correct!\")"}
+ {:type :stop}
+ {:type :markdown :value
+  "## when
+
+  Cuando sólo te interesa lo que sucede en la ramificación del **true**, puedes usar
+  `when`, que sólo recibe el cuerpo de la función *true*. `when` devolverá el valor de la
+  última expresión evaluada (puedes pasarle múltiples expresiones)."}
+ {:type :input :value
+  "(when (< 1 2)
+  (+ 1 2 3) ; Se ejecutará pero no se devolverá
+  (- 3 1)   ; Se ejecutará pero no se devolverá
+  (* 6 6))"}
+ {:type :stop}
+ {:type :markdown :value
+  "Suficientes ramificaciones por ahora.
+
+  Si tienes curiosidad por otras formas condicionales más avanzadas, échale un vistazo a:
+
+  - [case](https://clojuredocs.org/clojure.core/case): como el `switch` de JS
+  - [cond](https://clojuredocs.org/clojure.core/cond)
+  - [condp](https://clojuredocs.org/clojure.core/condp)
+
+  Pasemos ahora a lo práctico, [Lección 5: Cómo definir variables y
+  funciones](#/file/5)"}
+ ]

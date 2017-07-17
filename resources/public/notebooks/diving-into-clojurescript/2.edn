@@ -7,9 +7,9 @@
  {:type :input :value "(inc (inc 5))"}
  {:type :stop}
  {:type :markdown :value
-  "How do would we know what that function does?
+  "How would we know what that function does?
 
-  In cljs there's an easy way. You can use the special repl form `doc` and call
+  In CLJS there's an easy way. You can use the special repl form `doc` and call
   it with the name of a function, and it will give you the functions
   documentation.
   "}
