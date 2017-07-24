@@ -56,9 +56,9 @@
  {:type :input :value "(take 5 (cycle [:blue :red]))"}
  {:type :stop}
  {:type :markdown :value
-  "# Comprensiones de lista
+  "# Comprensiones de listas
 
-  Podemos hacer comprensiones de lista como en es2015, utilizando `for`.
+  Podemos hacer comprensiones de lista, utilizando `for`.
 
   Vamos a crear una lista de puntos para un tablero de 4x4:"}
  {:type :input :value
