@@ -58,6 +58,8 @@
  {:type :markdown :value
   "# List comprehensions
 
+  We can do list comprehensions, by using `for`.
+
   Let's create a list of points of a 4x4 board:"}
  {:type :input :value
   "(for [x (range 4) y (range 4)]
